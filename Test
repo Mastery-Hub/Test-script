@@ -1,3 +1,18 @@
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+
+getgenv().Key = "abc123" -- Thay bằng key bạn nhập
+
+local function verifyKey(key)
+    local response = game:HttpGet("https://raw.githubusercontent.com/Mastery-Hub/Key-script/main/Keys.txt")
+    return response:find(key)
+end
+
+if not verifyKey(getgenv().Key) then
+    game.Players.LocalPlayer:Kick("Key sai hoặc hết hạn. Lấy key tại: https://shoproblox29.cfd/")
+    return
+end
+
+
 
 --[[local a = game:GetService("RbxAnalyticsService"):GetClientId()
 if string.lower(a) ~= game:GetService("RbxAnalyticsService"):GetClientId() then
