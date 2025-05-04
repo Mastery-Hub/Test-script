@@ -1,37 +1,4 @@
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-
--- Lấy danh sách key từ URL (https://raw.githubusercontent.com/Mastery-Hub/Key-script/refs/heads/main/Keys.txt)
-local function checkKey(key)
-    local response = game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/Mastery-Hub/Key-script/refs/heads/main/Keys.txt")
-    local keys = response:split("\n")
-
-    -- Debug: In ra các key đã lấy được từ file Keys.txt
-    print("Danh sách key từ Keys.txt:")
-    for _, v in ipairs(keys) do
-        print(v)  -- In ra từng key trong danh sách
-    end
-
-    -- Kiểm tra key nhập vào
-    for _, v in ipairs(keys) do
-        if v:match("^%s*(.-)%s*$") == key:match("^%s*(.-)%s*$") then
-            return true
-        end
-    end
-    return false
-end
-
--- Gắn key bạn nhập vào (Key này bạn nhập khi chạy script)
-getgenv().Key = "d9b2d63d-a233-4e04-8d09-8b7a7d073e90"  -- Thay bằng key của bạn
-
--- Kiểm tra xem key có hợp lệ không
-if checkKey(getgenv().Key) then
-    -- Key hợp lệ, tải script
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Mastery-Hub/Test-script/refs/heads/main/Test"))()
-else
-    warn("Key không hợp lệ!")
-end
 local MatsuneA1 = {};
-
 MatsuneA1["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
 MatsuneA1["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
