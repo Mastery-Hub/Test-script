@@ -1,3 +1,37 @@
+--[[ CẤU HÌNH SCRIPT BẰNG GETGENV ]]
+getgenv().Key = getgenv().Key or "ABC-123-XYZ"
+getgenv().Team = getgenv().Team or "Pirates"         -- Hoặc "Marines"
+getgenv().AutoScript = getgenv().AutoScript or true  -- Tự động tải script
+getgenv().AutoFarm = getgenv().AutoFarm or true      -- Tự động farm
+getgenv().FastAttack = getgenv().FastAttack or false -- Tăng tốc đánh
+getgenv().AutoQuest = getgenv().AutoQuest or false   -- Tự nhận nhiệm vụ
+getgenv().ServerHop = getgenv().ServerHop or false   -- Tự đổi server
+getgenv().Webhook = getgenv().Webhook or ""          -- Gửi log về Discord nếu có
+
+--[[ TẢI SCRIPT CHÍNH SAU KHI GAME LOAD ]]
+repeat wait() until game:IsLoaded()
+
+--[[ KIỂM TRA KEY ]]
+local validKey = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
+if getgenv().Key ~= validKey then
+    warn("[Script] Key không hợp lệ. Hãy nhập đúng key.")
+    game.Players.LocalPlayer:Kick("Key sai. Vui lòng nhập lại.")
+    return
+else
+    print("[Script] Key hợp lệ. Tiếp tục...")
+end
+
+--[[ TỰ TẢI SCRIPT NẾU ĐƯỢC BẬT ]]
+if getgenv().AutoScript then
+    print("[Script] Đang tải script chính...")
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Mastery-Hub/Test-script/refs/heads/main/Script-Test", true))()
+    end)
+    if not success then
+        warn("[Script] Lỗi khi tải script: " .. tostring(err))
+    end
+end
+
 print("Break");
 local v0 = require(game:GetService("ReplicatedStorage").Notification);
 v0.new("<Color=Yellow>Welcome to Mastery Hub<Color=/>"):Display();
@@ -8,9 +42,9 @@ v0.new("<Color=Red>VIETNAM MUÔN NĂM<Color=/>"):Display();
 wait(1.5);
 v0.new("<Color=Black>CALI TUỔI LỒN<Color=/>"):Display();
 wait(2.0);
-v0.new("<Color=Green>FULL SCRIPT BY KENNY https://anotepad.com/notes/6pgkc6y4<Color=/>"):Display();
+v0.new("<Color=Blue>FULL SCRIPT BY KENNY https://anotepad.com/notes/6pgkc6y4<Color=/>"):Display();
 wait(2.5);
-v0.new("<Color=Blue>MAKE BY KENNY<Color=/>"):Display();
+v0.new("<Color=Green>MAKE BY KENNY<Color=/>"):Display();
 wait(3.0);
 repeat
 	wait();
