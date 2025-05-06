@@ -165,7 +165,7 @@ v5.Window = function(v134, v135)
 	v170.BackgroundTransparency = 1.1;
 	v170.Position = UDim2.new(0.405426834, 0, 0.075000003, 0);
 	v170.Size = UDim2.new(0, 263, 0, 325);
-	v170.Image = "http://www.roblox.com/asset/?id="   .. tostring(75617874946759) ;
+	v170.Image = "http://www.roblox.com/asset/?id="   .. tostring(103691718434653) ;
 	local v178 = Instance.new("UICorner");
 	v178.Name = "MCNR";
 	v178.Parent = v147;
@@ -174,7 +174,7 @@ v5.Window = function(v134, v135)
 	v181.Parent = BackgroundImage;
 	local v184 = Instance.new("UICorner");
 	v184.Name = "lol";
-	v184.Parent = Dark;
+	v184.Parent = dark;
 	local v187 = Instance.new("Frame");
 	v187.Name = "Top";
 	v187.Parent = v147;
@@ -987,7 +987,7 @@ v8.BorderSizePixel = 0;
 v8.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0);
 v8.Size = UDim2.new(0, 53.5, 0, 53.5);
 v8.BackgroundTransparency = 1;
-v8.Image = "rbxassetid://75617874946759";
+v8.Image = "rbxassetid://103691718434653";
 v8.Draggable = true;
 v8.MouseButton1Click:Connect(function()
 	game.CoreGui:FindFirstChild("Anchor").Enabled = not game.CoreGui:FindFirstChild("Anchor").Enabled;
@@ -9979,7 +9979,7 @@ v74:Toggle("Esp Mystic Island", false, function(v442)
 end);
 v74:Seperator("Troll");
 v74:Button("Rain Fruit", function()
-	for v827, v828 in pairs(game:GetObjects("rbxassetid://75617874946759")[1]:GetChildren()) do
+	for v827, v828 in pairs(game:GetObjects("rbxassetid://103691718434653")[1]:GetChildren()) do
 		v828.Parent = game.Workspace.Map;
 		v828:MoveTo(game.Players.LocalPlayer.Character.PrimaryPart.Position + Vector3.new(math.random( -50, 50), 100, math.random( -50, 50)) );
 		if v828.Fruit:FindFirstChild("AnimationController") then
@@ -10247,7 +10247,7 @@ v74:Button("Kaitun Cap", function(v471)
 	for v863, v864 in pairs(v472) do
 		if (v495[v864] and (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy"   .. v864 , true) == 1)) then
 			local v1663 = Instance.new("ImageLabel", v496);
-			v1663.Image = "rbxassetid://75617874946759";
+			v1663.Image = "rbxassetid://113128497133746";
 			v1663.ImageRectSize = Vector2.new(100, 100);
 			v1663.ImageRectOffset = v495[v864] * 100 ;
 		end
@@ -11961,7 +11961,7 @@ local v122 = game:GetService("Players");
 game:GetService("StarterGui"):SetCore("SendNotification", {
 	Title = "Mastery Hub",
 	Text = "Loading...",
-	Icon = "rbxthumb://type=Asset&id=75617874946759&w=150&h=150",
+	Icon = "rbxthumb://type=Asset&id=103691718434653&w=150&h=150",
 	Duration = 10
 });
 spawn(function()
