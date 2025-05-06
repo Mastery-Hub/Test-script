@@ -16,20 +16,17 @@ end
 
 -- Tiếp tục đợi GUI chính tải
 repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main")
--- Tạo key cố định
-local yourKey = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94" -- Key cố định bạn muốn
 
--- Kiểm tra key người dùng nhập
-if getgenv().Key ~= yourKey then
-    game:GetService("Players").LocalPlayer:Kick("Sai key. Vui lòng nhập đúng key để sử dụng script.")
-    return
-end
 print("Break");
 local v0 = require(game:GetService("ReplicatedStorage").Notification);
-v0.new("<Color=Red>Welcome to Mastery Hub<Color=/>"):Display();
+v0.new("<Color=Black>Welcome to Mastery Hub<Color=/>"):Display();
 wait(0.5);
 v0.new("<Color=Cyan>Everyone Goes to Discord to Communicate<Color=/>"):Display();
 wait(1);
+v0.new("<Color=Red>VIETNAM CHAMPION<Color=/>"):Display();
+wait(1.5);
+v0.new("<Color=Yellow>CALI PUSSY AGE<Color=/>"):Display();
+wait(2.0);
 repeat
 	wait();
 until game.Players.LocalPlayer
