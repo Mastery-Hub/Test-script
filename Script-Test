@@ -1,3 +1,95 @@
+shared.LoaderTitle = "Đăng Ký Kênh Mastery Sigma";
+shared.LoaderKeyFrames = {
+    [1] = {
+        1,
+        10
+    },
+    [2] = {
+        2,
+        30
+    },
+    [3] = {
+        3,
+        60
+    },
+    [4] = {
+        2,
+        100
+    }
+};
+local v2 = {
+    LoaderData = {
+        Name = shared.LoaderTitle or "A Loader",
+        Colors = shared.LoaderColors or {
+            Main = Color3.fromRGB(0, 0, 0),
+            Topic = Color3.fromRGB(200, 200, 200),
+            Title = Color3.fromRGB(255, 255, 255),
+            LoaderBackground = Color3.fromRGB(40, 40, 40),
+            LoaderSplash = Color3.fromRGB(3, 252, 3)
+        }
+    },
+    Keyframes = shared.LoaderKeyFrames or {
+        [1] = {
+            1,
+            10
+        },
+        [2] = {
+            2,
+            30
+        },
+        [3] = {
+            3,
+            60
+        },
+        [4] = {
+            2,
+            100
+        }
+    }
+};
+local v3 = {
+    [1] = "",
+    [2] = "",
+    [3] = "",
+    [4] = ""
+};
+function TweenObject(v178, v179, v180)
+    game.TweenService:Create(v178, TweenInfo.new(v179, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), v180):Play();
+end
+function CreateObject(v181, v182)
+    local v183 = Instance.new(v181);
+    local v184;
+    for v416, v417 in pairs(v182) do
+        if (v416 ~= "Parent") then
+            v183[v416] = v417;
+        else
+            v184 = v417;
+        end
+    end
+    v183.Parent = v184;
+    return v183;
+end
+local function v4(v186, v187)
+    local v188 = Instance.new("UICorner");
+    v188.CornerRadius = UDim.new(0, v186);
+    v188.Parent = v187;
+end
+local v5 = CreateObject("ScreenGui", {
+    Name = "Core",
+    Parent = game.CoreGui
+});
+local v6 = CreateObject("Frame", {
+    Name = "Main",
+    Parent = v5,
+    BackgroundColor3 = v2.LoaderData.Colors.Main,
+    BorderSizePixel = 0,
+    ClipsDescendants = true,
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Size = UDim2.new(0, 0, 0, 0)
+});
+
+
 print("Break");
 local v0 = require(game:GetService("ReplicatedStorage").Notification);
 v0.new("<Color=Black>Welcome to Mastery Hub<Color=/>"):Display();
@@ -12217,3 +12309,159 @@ function FastAttackConnectorFunction()
 	return ReturnFunctions;
 end
 return FastAttackConnectorFunction();
+
+-- TweenService declaration
+local TweenService = game:GetService("TweenService")
+
+-- Function to run loader animation
+spawn(function()
+    wait(0.5)
+    TweenObject(v6, 0.5, {Size = UDim2.new(0, 350, 0, 150)})
+    wait(0.6)
+
+    local title = CreateObject("TextLabel", {
+        Name = "Title",
+        Parent = v6,
+        BackgroundTransparency = 1,
+        Position = UDim2.new(0.5, 0, 0.2, 0),
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        Size = UDim2.new(0.8, 0, 0.3, 0),
+        Font = Enum.Font.GothamBold,
+        Text = v2.LoaderData.Name,
+        TextColor3 = v2.LoaderData.Colors.Title,
+        TextScaled = true
+    })
+
+    local splash = CreateObject("Frame", {
+        Name = "Splash",
+        Parent = v6,
+        BackgroundColor3 = v2.LoaderData.Colors.LoaderSplash,
+        BorderSizePixel = 0,
+        Position = UDim2.new(0, 0, 0.8, 0),
+        Size = UDim2.new(0, 0, 0.05, 0)
+    })
+    v4(4, splash)
+
+    -- Animate splash bar
+    for i = 1, #v2.Keyframes do
+        local frame = v2.Keyframes[i]
+        local size = frame[1]
+        local delay = frame[2] / 100
+        TweenObject(splash, delay, {Size = UDim2.new(size / 3, 0, 0.05, 0)})
+        wait(delay)
+    end
+
+    
+-- Blur effect
+local blur = Instance.new("BlurEffect", game:GetService("Lighting"))
+blur.Size = 24
+
+-- Sound effect
+local sound = Instance.new("Sound", v5)
+sound.SoundId = "rbxassetid://9118823104" -- Optional: Replace with custom ID
+sound.Volume = 1
+sound:Play()
+
+-- Add Logo Image
+local logo = CreateObject("ImageLabel", {
+    Name = "Logo",
+    Parent = v6,
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0.5, 0, 0.05, 0),
+    AnchorPoint = Vector2.new(0.5, 0),
+    Size = UDim2.new(0, 64, 0, 64),
+    Image = "rbxassetid://7733960981" -- Optional: Replace with your own logo
+})
+
+-- Subtitle
+local subtitle = CreateObject("TextLabel", {
+    Name = "Subtitle",
+    Parent = v6,
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    AnchorPoint = Vector2.new(0.5, 0),
+    Size = UDim2.new(0.9, 0, 0.2, 0),
+    Font = Enum.Font.Gotham,
+    Text = "Đang khởi động, vui lòng đợi...",
+    TextColor3 = v2.LoaderData.Colors.Topic,
+    TextScaled = true
+})
+
+-- Add Skip Button
+local skipBtn = CreateObject("TextButton", {
+    Name = "Skip",
+    Parent = v6,
+    BackgroundColor3 = Color3.fromRGB(30,30,30),
+    Text = "BỎ QUA",
+    Font = Enum.Font.GothamBold,
+    TextColor3 = Color3.new(1,1,1),
+    Position = UDim2.new(1, -60, 0, 10),
+    AnchorPoint = Vector2.new(1, 0),
+    Size = UDim2.new(0, 50, 0, 25),
+    TextScaled = true
+})
+v4(6, skipBtn)
+skipBtn.MouseButton1Click:Connect(function()
+    v5:Destroy()
+    blur:Destroy()
+end)
+
+
+-- Animate logo (rotation)
+task.spawn(function()
+    while logo and logo.Parent do
+        logo.Rotation += 1
+        task.wait()
+    end
+end)
+
+-- Animated border (pulsing frame)
+local border = CreateObject("Frame", {
+    Name = "Border",
+    Parent = v6,
+    BackgroundTransparency = 1,
+    BorderSizePixel = 4,
+    BorderColor3 = Color3.fromRGB(3, 252, 3),
+    Size = UDim2.new(1, 8, 1, 8),
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5)
+})
+task.spawn(function()
+    local grow = true
+    while border and border.Parent do
+        TweenObject(border, 0.5, {
+            Size = grow and UDim2.new(1, 12, 1, 12) or UDim2.new(1, 8, 1, 8),
+            BackgroundTransparency = grow and 0.9 or 1
+        })
+        grow = not grow
+        wait(0.5)
+    end
+end)
+
+-- Circular loading spinner
+local spinner = CreateObject("ImageLabel", {
+    Name = "Spinner",
+    Parent = v6,
+    BackgroundTransparency = 1,
+    Size = UDim2.new(0, 32, 0, 32),
+    Position = UDim2.new(0.5, 0, 0.85, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Image = "rbxassetid://3926305904",
+    ImageRectOffset = Vector2.new(564, 284),
+    ImageRectSize = Vector2.new(36, 36)
+})
+task.spawn(function()
+    while spinner and spinner.Parent do
+        spinner.Rotation += 10
+        wait(0.03)
+    end
+end)
+
+-- Loader completion clean up
+wait(0.2)
+TweenObject(v6, 0.5, {Size = UDim2.new(0, 0, 0, 0)})
+wait(0.6)
+v5:Destroy()
+blur:Destroy()
+
+end)
