@@ -1,3 +1,29 @@
+-- Cài đặt team và khởi tạo biến
+getgenv().team = "Marines" -- Pirates
+
+-- Đợi game tải hoàn chỉnh
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("DataLoaded")
+
+-- Tự động chọn team với phương pháp đáng tin cậy hơn
+if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Main (minimal)") then
+    repeat
+        wait()
+        local l_Remotes_0 = game.ReplicatedStorage:WaitForChild("Remotes")
+        l_Remotes_0.CommF_:InvokeServer("SetTeam", getgenv().team)
+        task.wait(3)
+    until not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Main (minimal)")
+end
+
+-- Tiếp tục đợi GUI chính tải
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main")
+-- Tạo key cố định
+local yourKey = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94" -- Key cố định bạn muốn
+
+-- Kiểm tra key người dùng nhập
+if getgenv().Key ~= yourKey then
+    game:GetService("Players").LocalPlayer:Kick("Sai key. Vui lòng nhập đúng key để sử dụng script.")
+    return
+end
 print("Break");
 local v0 = require(game:GetService("ReplicatedStorage").Notification);
 v0.new("<Color=Red>Welcome to Mastery Hub<Color=/>"):Display();
@@ -10247,7 +10273,7 @@ v74:Button("Kaitun Cap", function(v471)
 	for v863, v864 in pairs(v472) do
 		if (v495[v864] and (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy"   .. v864 , true) == 1)) then
 			local v1663 = Instance.new("ImageLabel", v496);
-			v1663.Image = "rbxassetid://113128497133746";
+			v1663.Image = "rbxassetid://103691718434653";
 			v1663.ImageRectSize = Vector2.new(100, 100);
 			v1663.ImageRectOffset = v495[v864] * 100 ;
 		end
