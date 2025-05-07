@@ -1,36 +1,53 @@
---[[ CẤU HÌNH SCRIPT BẰNG GETGENV ]]
-getgenv().Key = getgenv().Key or "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
-getgenv().Team = getgenv().Team or "Pirates"         -- Hoặc "Marines"
-getgenv().AutoScript = getgenv().AutoScript or true  -- Tự động tải script
-getgenv().AutoFarm = getgenv().AutoFarm or true      -- Tự động farm
-getgenv().FastAttack = getgenv().FastAttack or false -- Tăng tốc đánh
-getgenv().AutoQuest = getgenv().AutoQuest or false   -- Tự nhận nhiệm vụ
-getgenv().ServerHop = getgenv().ServerHop or false   -- Tự đổi server
-getgenv().Webhook = getgenv().Webhook or ""          -- Gửi log về Discord nếu có
+-- Cấu hình người dùng
+getgenv().Key = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
+getgenv().Team = "Pirates"
+getgenv().AutoScript = true
+getgenv().AutoFarm = true
+getgenv().FastAttack = true
+getgenv().AutoQuest = true
+getgenv().Webhook = "https://discord.com/api/webhooks/..." -- Thay link webhook của bạn
 
---[[ TẢI SCRIPT CHÍNH SAU KHI GAME LOAD ]]
-repeat wait() until game:IsLoaded()
-
---[[ KIỂM TRA KEY ]]
+-- Kiểm tra key
 local validKey = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
 if getgenv().Key ~= validKey then
-    warn("[Script] Key không hợp lệ. Hãy nhập đúng key.")
-    game.Players.LocalPlayer:Kick("Key sai. Vui lòng nhập lại.")
+    game.Players.LocalPlayer:Kick("Sai Key. Vui lòng nhập đúng key!")
     return
-else
-    print("[Script] Key hợp lệ. Tiếp tục...")
 end
 
---[[ TỰ TẢI SCRIPT NẾU ĐƯỢC BẬT ]]
+-- Gửi log về Discord
+if getgenv().Webhook ~= "" then
+    pcall(function()
+        local player = game.Players.LocalPlayer
+        local data = {
+            ["content"] = "",
+            ["embeds"] = {{
+                ["title"] = "Script Activated",
+                ["description"] = "**Thông tin người dùng:**",
+                ["color"] = 16711680,
+                ["fields"] = {
+                    {["name"] = "Username", ["value"] = player.Name, ["inline"] = true},
+                    {["name"] = "User ID", ["value"] = tostring(player.UserId), ["inline"] = true},
+                    {["name"] = "Team", ["value"] = getgenv().Team, ["inline"] = true},
+                    {["name"] = "AutoScript", ["value"] = tostring(getgenv().AutoScript), ["inline"] = true},
+                    {["name"] = "AutoFarm", ["value"] = tostring(getgenv().AutoFarm), ["inline"] = true},
+                    {["name"] = "FastAttack", ["value"] = tostring(getgenv().FastAttack), ["inline"] = true},
+                    {["name"] = "AutoQuest", ["value"] = tostring(getgenv().AutoQuest), ["inline"] = true},
+                    {["name"] = "Time", ["value"] = os.date("%Y-%m-%d %H:%M:%S"), ["inline"] = false},
+                }
+            }}
+        }
+        local http = game:GetService("HttpService")
+        http:PostAsync(getgenv().Webhook, http:JSONEncode(data), Enum.HttpContentType.ApplicationJson)
+        print("[Script] Đã gửi log về Discord!")
+    end)
+end
+
+-- Chạy script chính nếu AutoScript = true
 if getgenv().AutoScript then
     print("[Script] Đang tải script chính...")
-    local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Mastery-Hub/Test-script/refs/heads/main/Script-Test", true))()
-    end)
-    if not success then
-        warn("[Script] Lỗi khi tải script: " .. tostring(err))
-    end
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Mastery-Hub/Test-script/refs/heads/main/Test"))()
 end
+
 
 print("Break");
 local v0 = require(game:GetService("ReplicatedStorage").Notification);
