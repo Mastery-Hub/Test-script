@@ -1,5 +1,5 @@
 --[[ CẤU HÌNH SCRIPT BẰNG GETGENV ]]
-getgenv().Key = getgenv().Key or "ABC-123-XYZ"
+getgenv().Key = getgenv().Key or "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
 getgenv().Team = getgenv().Team or "Pirates"         -- Hoặc "Marines"
 getgenv().AutoScript = getgenv().AutoScript or true  -- Tự động tải script
 getgenv().AutoFarm = getgenv().AutoFarm or true      -- Tự động farm
