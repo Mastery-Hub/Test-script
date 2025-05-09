@@ -1,10 +1,9 @@
-
 --[[
 
-From: Noguchi Hyuga
-- Website: iamkhnah.github.io/noguchihyuga/index.html 
-- Facebook Founder: fb.com/p.khnah.itonltz
-- Discord Server: https://discord.gg/836PgY82J4
+From: Qminh(Kenny)
+- Website: https://shoproblox29.cfd/
+- Facebook Founder: https://www.facebook.com/share/1XycMmF2GJ/
+- Discord Server: https://discord.gg/uNvZEcaUhh
 
 --// Lưu Ý:
 - Không Được Share Hay Crack Mã Nguồn Này Cho Ai!
@@ -13,129 +12,36 @@ From: Noguchi Hyuga
 
 ]]--
 
-if not LPH_OBFUSCATED then
-    function LPH_JIT_MAX(...)
-       return ...;
-    end
-    function LPH_NO_VIRTUALIZE(...)
-        return ...;
-    end
-    function LPH_NO_UPVALUES(...)
-        return ...;
-    end
+if  not LPH_OBFUSCATED then
+	function LPH_JIT_MAX(...)
+		return ...;
+	end
+	function LPH_NO_VIRTUALIZE(...)
+		return ...;
+	end
+	function LPH_NO_UPVALUES(...)
+		return ...;
+	end
 end
-
 spawn(function()
-    for v706, v707 in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
-        if ((v707.Name == "Death") or (v707.Name == "Spawn")) then
-            v707:Destroy();
-        end
-    end
+	for v706, v707 in pairs(game:GetService("ReplicatedStorage").Effect.Container:GetChildren()) do
+		if ((v707.Name == "Death") or (v707.Name == "Spawn")) then
+			v707:Destroy();
+		end
+	end
 end);
-
 spawn(function()
-    for v708, v709 in pairs(game:GetDescendants()) do
-        if (v709:IsA("ParticleEmitter") or v709:IsA("Trail")) then
-            v709.Lifetime = NumberRange.new(0);
-        elseif v709:IsA("Explosion") then
-            v709.BlastPressure = 1;
-            v709.BlastRadius = 1;
-        elseif (v709:IsA("Fire") or v709:IsA("SpotLight") or v709:IsA("Smoke")) then
-            v709.Enabled = false;
-        end
-    end
+	for v708, v709 in pairs(game:GetDescendants()) do
+		if (v709:IsA("ParticleEmitter") or v709:IsA("Trail")) then
+			v709.Lifetime = NumberRange.new(0);
+		elseif v709:IsA("Explosion") then
+			v709.BlastPressure = 1;
+			v709.BlastRadius = 1;
+		elseif (v709:IsA("Fire") or v709:IsA("SpotLight") or v709:IsA("Smoke")) then
+			v709.Enabled = false;
+		end
+	end
 end);
-
--- Mã lệnh giao diện hệ thống Roblox Key --
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local TweenService = game:GetService("TweenService")
-
--- CONFIG
-local CONFIG = {
-    KEYS = {
-        "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94",
-        "dexskibidi2",
-        "dexskibidi3"
-    },
-    MAX_ATTEMPTS = 3,
-    REMOTE_EVENT_NAME = "ValidateKey"
-}
-
--- Create RemoteEvent if not exists
-local ValidateKeyEvent = ReplicatedStorage:FindFirstChild(CONFIG.REMOTE_EVENT_NAME)
-if not ValidateKeyEvent then
-    ValidateKeyEvent = Instance.new("RemoteEvent")
-    ValidateKeyEvent.Name = CONFIG.REMOTE_EVENT_NAME
-    ValidateKeyEvent.Parent = ReplicatedStorage
-end
-
--- Function to create Key System UI
-local function createKeySystemUI()
-    local KeySystemGui = Instance.new("ScreenGui")
-    KeySystemGui.Name = "KeySystemGui"
-    KeySystemGui.ResetOnSpawn = false
-    KeySystemGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    KeySystemGui.Parent = PlayerGui
-
-    local MainFrame = Instance.new("Frame")
-    MainFrame.Name = "MainFrame"
-    MainFrame.Size = UDim2.new(0, 400, 0, 250)
-    MainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
-    MainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    MainFrame.BorderSizePixel = 0
-    MainFrame.ClipsDescendants = true
-    MainFrame.Parent = KeySystemGui
-
-    local UICorner = Instance.new("UICorner")
-    UICorner.CornerRadius = UDim.new(0, 8)
-    UICorner.Parent = MainFrame
-
-    local TitleLabel = Instance.new("TextLabel")
-    TitleLabel.Name = "TitleLabel"
-    TitleLabel.Size = UDim2.new(1, 0, 0, 40)
-    TitleLabel.BackgroundTransparency = 1
-    TitleLabel.Position = UDim2.new(0, 0, 0, 10)
-    TitleLabel.Font = Enum.Font.GothamBold
-    TitleLabel.Text = "Dex Skibidi Key System"
-    TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TitleLabel.TextSize = 24
-    TitleLabel.Parent = MainFrame
-
-    local KeyInput = Instance.new("TextBox")
-    KeyInput.Name = "KeyInput"
-    KeyInput.Size = UDim2.new(0.8, 0, 0, 40)
-    KeyInput.Position = UDim2.new(0.1, 0, 0, 85)
-    KeyInput.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-    KeyInput.BorderSizePixel = 0
-    KeyInput.Font = Enum.Font.Gotham
-    KeyInput.PlaceholderText = "Enter key here..."
-    KeyInput.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
-    KeyInput.Text = ""
-    KeyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-    KeyInput.TextSize = 14
-    KeyInput.Parent = MainFrame
-
-    local SubmitButton = Instance.new("TextButton")
-    SubmitButton.Name = "SubmitButton"
-    SubmitButton.Size = UDim2.new(0.8, 0, 0, 40)
-    SubmitButton.Position = UDim2.new(0.1, 0, 0, 165)
-    SubmitButton.BackgroundColor3 = Color3.fromRGB(70, 130, 220)
-    SubmitButton.BorderSizePixel = 0
-    SubmitButton.Font = Enum.Font.GothamBold
-    SubmitButton.Text = "SUBMIT"
-    SubmitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SubmitButton.TextSize = 16
-    SubmitButton.Parent = MainFrame
-
-    return KeySystemGui, MainFrame, KeyInput, SubmitButton
-end
-
-createKeySystemUI()
-
--- End of Key System UI
 local v0 = game:GetService("UserInputService");
 local v1 = game:GetService("TweenService");
 local function v2(v124, v125)
@@ -176,7 +82,7 @@ local function v2(v124, v125)
 end
 _G.BGColor_1 = Color3.fromRGB(30, 30, 30);
 _G.BGColor_2 = Color3.fromRGB(20, 20, 20);
-_G.Color = Color3.fromRGB(128, 102, 255);
+_G.Color = Color3.fromRGB(139, 0, 0)
 _G.WindowBackgroundColor = Color3.fromRGB(12, 12, 12);
 _G.BackgroundItemColor = Color3.fromRGB(20, 20, 20);
 _G.TabWindowColor = Color3.fromRGB(30, 30, 30);
@@ -344,7 +250,7 @@ v3.Window = function(v209, v210, v211, v212)
 	local v243 = Instance.new("ImageLabel");
 	v243.Name = "Logo";
 	v243.Parent = v235;
-	v243.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+	v243.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 	v243.BackgroundTransparency = 1;
 	v243.Position = UDim2.new( -0.01, 0, -0.319, 0);
 	v243.Size = UDim2.new(0, 55, 0, 45);
@@ -352,18 +258,18 @@ v3.Window = function(v209, v210, v211, v212)
 	local v251 = Instance.new("TextLabel");
 	v251.Name = "Name";
 	v251.Parent = v235;
-	v251.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+	v251.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 	v251.BackgroundTransparency = 1;
 	v251.Position = UDim2.new(0.0909756112, 0, 0, 0);
 	v251.Size = UDim2.new(0, 61, 0, 27);
 	v251.Font = Enum.Font.Code;
 	v251.Text = v210;
-	v251.TextColor3 = Color3.fromRGB(128, 102, 255);
+	v251.TextColor3 = Color3.fromRGB(139, 0, 0);
 	v251.TextSize = 16;
 	local v263 = Instance.new("TextLabel");
 	v263.Name = "";
 	v263.Parent = v235;
-	v263.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+	v263.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 	v263.BackgroundTransparency = 1;
 	v263.Position = UDim2.new(0, 78, 0, 0);
 	v263.Size = UDim2.new(0, 81, 0, 27);
@@ -374,7 +280,7 @@ v3.Window = function(v209, v210, v211, v212)
 	local v274 = Instance.new("ImageLabel");
 	local v275 = Instance.new("Frame");
 	v274.Parent = v224;
-	v274.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+	v274.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 	v274.BackgroundTransparency = 1;
 	v274.Position = UDim2.new(0, 25, 0, 25);
 	v274.Size = UDim2.new(0, 100, 0, 170);
@@ -397,7 +303,7 @@ v3.Window = function(v209, v210, v211, v212)
 	v294.Name = "ScrollTab";
 	v294.Parent = v282;
 	v294.Active = true;
-	v294.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+	v294.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 	v294.BackgroundTransparency = 1;
 	v294.Size = UDim2.new(0, 133, 0, 250);
 	v294.CanvasSize = UDim2.new(0, 0, 0, 0);
@@ -425,7 +331,7 @@ v3.Window = function(v209, v210, v211, v212)
 	v322.Name = "MainPage";
 	v322.Parent = v313;
 	v322.ClipsDescendants = true;
-	v322.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+	v322.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 	v322.BackgroundTransparency = 1;
 	v322.Size = UDim2.new(0, 325, 0, 316);
 	local v329 = Instance.new("Folder");
@@ -461,7 +367,7 @@ v3.Window = function(v209, v210, v211, v212)
 		v721.Parent = v294;
 		v721.Name = v719   .. "Server" ;
 		v721.Text = v719;
-		v721.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+		v721.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 		v721.BackgroundTransparency = 1;
 		v721.Size = UDim2.new(0, 130, 0, 23);
 		v721.Font = Enum.Font.Gotham;
@@ -490,7 +396,7 @@ v3.Window = function(v209, v210, v211, v212)
 		v752.Name = v719   .. "_Page" ;
 		v752.Parent = v329;
 		v752.Active = true;
-		v752.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+		v752.BackgroundColor3 = Color3.fromRGB(128, 0, 0);
 		v752.BackgroundTransparency = 1;
 		v752.BorderSizePixel = 0;
 		v752.Size = UDim2.new(0, 400, 0, 245);
@@ -748,7 +654,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1142.Name = "UIStroke";
 			v1142.Parent = v1141;
 			v1142.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-			v1142.Color = Color3.fromRGB(128, 102, 255);
+			v1142.Color = Color3.fromRGB(139, 0, 0);
 			v1142.LineJoinMode = Enum.LineJoinMode.Round;
 			v1142.Thickness = 1;
 			v1142.Transparency = 0;
@@ -764,7 +670,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1145.Position = UDim2.new( -0.018, 0, -0.252, 0);
 			v1145.Size = UDim2.new(0, 45, 0, 45);
 			v1145.Image = "rbxassetid://";
-			v1145.ImageColor3 = Color3.fromRGB(128, 102, 255);
+			v1145.ImageColor3 = Color3.fromRGB(139, 0, 0);
 			v1146.Name = "Space";
 			v1146.Parent = v1141;
 			v1146.BackgroundColor3 = Color3.fromRGB(150, 150, 150);
@@ -784,18 +690,18 @@ v3.Window = function(v209, v210, v211, v212)
 			v1147.Size = UDim2.new(0, 280, 0, 30);
 			v1147.Font = Enum.Font.Gotham;
 			v1147.Text = v1136 or "checkBox Title" ;
-			v1147.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1147.TextColor3 = Color3.fromRGB(139, 0, 0);
 			v1147.TextSize = 12;
 			v1147.TextXAlignment = Enum.TextXAlignment.Left;
 			v1148.Name = "ImageButton";
 			v1148.Parent = v1141;
-			v1148.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1148.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 			v1148.BackgroundTransparency = 1;
 			v1148.Position = UDim2.new(0, 280, 0, 4);
 			v1148.Size = UDim2.new(0, 23, 0, 23);
 			v1148.ZIndex = 2;
 			v1148.Image = "rbxassetid://3926311105";
-			v1148.ImageColor3 = Color3.fromRGB(128, 102, 255);
+			v1148.ImageColor3 = Color3.fromRGB(139, 0, 0);
 			v1148.ImageRectOffset = Vector2.new(940, 784);
 			v1148.ImageRectSize = Vector2.new(48, 48);
 			if (v1137 == true) then
@@ -814,7 +720,7 @@ v3.Window = function(v209, v210, v211, v212)
 					v1148.ImageRectOffset = Vector2.new(4, 836);
 				else
 					game.TweenService:Create(v1148, TweenInfo.new(0.08, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {
-						ImageColor3 = Color3.fromRGB(128, 102, 255)
+						ImageColor3 = Color3.fromRGB(139, 0, 0)
 					}):Play();
 					v1148.ImageRectOffset = Vector2.new(940, 784);
 				end
@@ -852,7 +758,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1226.Parent = v1225;
 			v1227.Name = "DropTitle";
 			v1227.Parent = v1225;
-			v1227.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1227.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 			v1227.BackgroundTransparency = 1;
 			v1227.Size = UDim2.new(0, 310, 0, 31);
 			v1227.Font = Enum.Font.Gotham;
@@ -862,7 +768,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1228.Name = "DropScroll";
 			v1228.Parent = v1227;
 			v1228.Active = true;
-			v1228.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1228.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 			v1228.BackgroundTransparency = 1;
 			v1228.BorderSizePixel = 0;
 			v1228.Position = UDim2.new(0, 0, 0, 31);
@@ -877,7 +783,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1230.PaddingTop = UDim.new(0, 5);
 			v1232.Name = "DropImage";
 			v1232.Parent = v1225;
-			v1232.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1232.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 			v1232.BackgroundTransparency = 1;
 			v1232.Position = UDim2.new(0, 280, 0, 6);
 			v1232.Rotation = 180;
@@ -885,7 +791,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1232.Image = "rbxassetid://6031090990";
 			v1231.Name = "DropButton";
 			v1231.Parent = v1225;
-			v1231.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1231.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 			v1231.BackgroundTransparency = 1;
 			v1231.Size = UDim2.new(0, 310, 0, 31);
 			v1231.Font = Enum.Font.SourceSans;
@@ -896,7 +802,7 @@ v3.Window = function(v209, v210, v211, v212)
 				local v1846 = Instance.new("TextButton");
 				v1846.Name = "Item";
 				v1846.Parent = v1228;
-				v1846.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+				v1846.BackgroundColor3 = Color3.fromRGB(139, 0, 0);
 				v1846.BackgroundTransparency = 1;
 				v1846.Size = UDim2.new(0, 310, 0, 26);
 				v1846.Font = Enum.Font.Gotham;
@@ -945,7 +851,7 @@ v3.Window = function(v209, v210, v211, v212)
 				local v1860 = Instance.new("TextButton");
 				v1860.Name = "Item";
 				v1860.Parent = v1228;
-				v1860.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+				v1860.BackgroundColor3 = Color3.fromRGB(139, 10, 0);
 				v1860.BackgroundTransparency = 1;
 				v1860.Size = UDim2.new(0, 310, 0, 26);
 				v1860.Font = Enum.Font.Gotham;
@@ -1024,7 +930,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1310.Name = "UIStroke";
 			v1310.Parent = v1309;
 			v1310.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-			v1310.Color = Color3.fromRGB(128, 102, 255);
+			v1310.Color = Color3.fromRGB(139, 0, 0);
 			v1310.LineJoinMode = Enum.LineJoinMode.Round;
 			v1310.Thickness = 1;
 			v1310.Transparency = 0;
@@ -1040,7 +946,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1312.Position = UDim2.new(0, 5, 0, 5);
 			v1312.Size = UDim2.new(0, 18, 0, 18);
 			v1312.Image = "rbxassetid://";
-			v1312.ImageColor3 = Color3.fromRGB(128, 102, 255);
+			v1312.ImageColor3 = Color3.fromRGB(139, 0, 0);
 			v1313.Name = "Space";
 			v1313.Parent = v1309;
 			v1313.BackgroundColor3 = Color3.fromRGB(150, 150, 150);
@@ -1050,7 +956,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1313.Font = Enum.Font.Gotham;
 			v1313.Text = "";
 			v1313.TextSize = 15;
-			v1313.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1313.TextColor3 = Color3.fromRGB(139, 0, 0);
 			v1313.TextXAlignment = Enum.TextXAlignment.Center;
 			v1314.Name = "Title";
 			v1314.Parent = v1309;
@@ -1060,12 +966,12 @@ v3.Window = function(v209, v210, v211, v212)
 			v1314.Size = UDim2.new(0, 280, 0, 30);
 			v1314.Font = Enum.Font.Gotham;
 			v1314.Text = v1302 or "Slider Title" ;
-			v1314.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1314.TextColor3 = Color3.fromRGB(139, 0, 0);
 			v1314.TextSize = 12;
 			v1314.TextXAlignment = Enum.TextXAlignment.Left;
 			v1315.Name = "SliderInput";
 			v1315.Parent = v1309;
-			v1315.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1315.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1315.BackgroundTransparency = 0.7;
 			v1315.BorderSizePixel = 0;
 			v1315.Position = UDim2.new(0, 8, 0, 37);
@@ -1081,7 +987,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1316.Size = UDim2.new(0, 290, 0, 25);
 			v1317.Name = "SliderCount";
 			v1317.Parent = v1316;
-			v1317.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1317.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1317.BackgroundTransparency = 0.3;
 			v1317.BorderSizePixel = 0;
 			v1317.Position = UDim2.new(0, v1305, 0, 0);
@@ -1089,14 +995,14 @@ v3.Window = function(v209, v210, v211, v212)
 			v1323.Name = "Title_2";
 			v1323.Parent = v1316;
 			v1323.AnchorPoint = Vector2.new(0, 0);
-			v1323.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1323.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1323.AutoButtonColor = false;
 			v1323.BackgroundTransparency = 1;
 			v1323.Position = UDim2.new(0, v1305, 0, 0);
 			v1323.Size = UDim2.new(0, 18, 0, 18);
 			v1323.Font = Enum.Font.GothamBold;
 			v1323.Text = tostring((v1305 and math.floor(((v1305 / v1304) * (v1304 - v1303)) + v1303 )) or 0 );
-			v1323.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1323.TextColor3 = Color3.fromRGB(139, 0, 0)
 			v1323.TextSize = 8;
 			v1323.TextXAlignment = Enum.TextXAlignment.Center;
 			v1324.Parent = v1323;
@@ -1106,7 +1012,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1322.Name = "SliderStroke";
 			v1322.Parent = v1320;
 			v1322.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-			v1322.Color = Color3.fromRGB(128, 102, 255);
+			v1322.Color = Color3.fromRGB(139, 0, 0)
 			v1322.LineJoinMode = Enum.LineJoinMode.Round;
 			v1322.Thickness = 1;
 			v1322.Transparency = 0.5;
@@ -1127,7 +1033,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1321.ClearTextOnFocus = false;
 			v1321.Font = Enum.Font.GothamBold;
 			v1321.Text = tostring((v1305 and math.floor(((v1305 / v1304) * (v1304 - v1303)) + v1303 )) or 0 );
-			v1321.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1321.TextColor3 = Color3.fromRGB(139, 0, 0)
 			v1321.TextSize = 9;
 			v1321.TextTransparency = 0;
 			v1321.TextXAlignment = Enum.TextXAlignment.Center;
@@ -1370,24 +1276,24 @@ v3.Window = function(v209, v210, v211, v212)
 			v1471.Parent = v1470;
 			v1472.Name = "SliderLabel";
 			v1472.Parent = v1470;
-			v1472.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1472.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1472.BackgroundTransparency = 1;
 			v1472.Position = UDim2.new(0, 15, 0, 0);
 			v1472.Size = UDim2.new(0, 180, 0, 26);
 			v1472.Font = Enum.Font.Gotham;
 			v1472.Text = v1463;
-			v1472.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1472.TextColor3 = Color3.fromRGB(139, 0, 0)
 			v1472.TextSize = 12;
 			v1472.TextTransparency = 0;
 			v1472.TextXAlignment = Enum.TextXAlignment.Left;
 			v1473.Name = "HAHA";
 			v1473.Parent = v1470;
-			v1473.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1473.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1473.BackgroundTransparency = 1;
 			v1473.Size = UDim2.new(0, 290, 0, 29);
 			v1474.Name = "AHEHE";
 			v1474.Parent = v1470;
-			v1474.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1474.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1474.BackgroundTransparency = 1;
 			v1474.Position = UDim2.new(0, 10, 0, 35);
 			v1474.Size = UDim2.new(0, 290, 0, 5);
@@ -1412,7 +1318,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1478.Parent = v1475;
 			v1479.Name = "circlebar";
 			v1479.Parent = v1476;
-			v1479.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1479.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1479.Position = UDim2.new(1, -2, 0, -3);
 			v1479.Size = UDim2.new(0, 10, 0, 10);
 			v1480.CornerRadius = UDim.new(0, 100);
@@ -1431,14 +1337,14 @@ v3.Window = function(v209, v210, v211, v212)
 			v1483.Position = UDim2.new(0, 0, 0, 0);
 			v1483.Size = UDim2.new(0, 60, 0, 20);
 			v1483.Font = Enum.Font.Gotham;
-			v1483.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1483.TextColor3 = Color3.fromRGB(139, 0, 0)
 			v1483.TextSize = 9;
 			v1483.Text = v1466;
 			v1483.TextTransparency = 0;
 			v1485.Name = "posto";
 			v1485.Parent = v1483;
 			v1485.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-			v1485.Color = Color3.fromRGB(128, 102, 255);
+			v1485.Color = Color3.fromRGB(139, 0, 0)
 			v1485.LineJoinMode = Enum.LineJoinMode.Round;
 			v1485.Thickness = 1;
 			v1485.Transparency = 0;
@@ -1526,7 +1432,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1595.Parent = v1594;
 			v1596.Name = "TextboxLabel";
 			v1596.Parent = v1592;
-			v1596.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1596.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1596.BackgroundTransparency = 1;
 			v1596.Position = UDim2.new(0, 15, 0, 0);
 			v1596.Text = v1589;
@@ -1538,7 +1444,7 @@ v3.Window = function(v209, v210, v211, v212)
 			v1596.TextXAlignment = Enum.TextXAlignment.Left;
 			v1597.Name = "txtbtn";
 			v1597.Parent = v1592;
-			v1597.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1597.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1597.BackgroundTransparency = 1;
 			v1597.Position = UDim2.new(0, 1, 0, 1);
 			v1597.Size = UDim2.new(0, 310, 0, 29);
@@ -1572,7 +1478,7 @@ v3.Window = function(v209, v210, v211, v212)
 			local v1658 = {};
 			v1656.Name = "Label";
 			v1656.Parent = v752;
-			v1656.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1656.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1656.BackgroundTransparency = 1;
 			v1656.Size = UDim2.new(0, 325, 0, 20);
 			v1656.Font = Enum.Font.Gotham;
@@ -1594,7 +1500,7 @@ v3.Window = function(v209, v210, v211, v212)
 			local v1679 = {};
 			v1677.Name = "Label1";
 			v1677.Parent = v752;
-			v1677.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1677.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1677.BackgroundTransparency = 1;
 			v1677.Size = UDim2.new(0, 325, 0, 20);
 			v1677.Font = Enum.Font.Gotham;
@@ -1617,7 +1523,7 @@ v3.Window = function(v209, v210, v211, v212)
 			local v1701 = Instance.new("Frame");
 			v1698.Name = "Seperator";
 			v1698.Parent = v752;
-			v1698.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1698.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1698.BackgroundTransparency = 1;
 			v1698.Size = UDim2.new(0, 290, 0, 20);
 			v1699.Name = "Sep1";
@@ -1628,13 +1534,13 @@ v3.Window = function(v209, v210, v211, v212)
 			v1699.Size = UDim2.new(0, 80, 0, 1);
 			v1700.Name = "Sep2";
 			v1700.Parent = v1698;
-			v1700.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1700.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1700.BackgroundTransparency = 1;
 			v1700.Position = UDim2.new(0, 120, 0, 0);
 			v1700.Size = UDim2.new(0, 80, 0, 20);
 			v1700.Font = Enum.Font.Gotham;
 			v1700.Text = v1697;
-			v1700.TextColor3 = Color3.fromRGB(128, 102, 255);
+			v1700.TextColor3 = Color3.fromRGB(139, 0, 0)
 			v1700.TextSize = 14;
 			v1701.Name = "Sep3";
 			v1701.Parent = v1698;
@@ -1648,7 +1554,7 @@ v3.Window = function(v209, v210, v211, v212)
 			local v1732 = Instance.new("Frame");
 			v1731.Name = "Linee";
 			v1731.Parent = v752;
-			v1731.BackgroundColor3 = Color3.fromRGB(128, 102, 255);
+			v1731.BackgroundColor3 = Color3.fromRGB(139, 0, 0)
 			v1731.BackgroundTransparency = 1;
 			v1731.Position = UDim2.new(0, 0, 0.119999997, 0);
 			v1731.Size = UDim2.new(0, 310, 0, 20);
@@ -3620,7 +3526,7 @@ if _G.FastAttack then
 		return v1766;
 	end)();
 end
-local v52 = v3:Window("Rubu Roblox", "");
+local v52 = v3:Window("Mastery Hub", "");
 local v53 = v52:T("Tab Status", "rbxassetid://10734984606");
 local v54 = v52:T("Tab General", "rbxassetid://10723407389");
 local v55 = v52:T("Setting Other", "rbxassetid://10734950309");
@@ -3637,7 +3543,7 @@ local v65 = v52:T("Miscellaneous", "rbxassetid://10709782582");
 v53:Seperator("Join Discord");
 v53:Label("Everyone Goes Into Socialize");
 v53:Button("Copy Discord Link", function()
-	setclipboard("https://discord.com/invite/hcJ8PHtkfy");
+	setclipboard("https://discord.gg/uNvZEcaUhh");
 end);
 v53:Seperator("Time");
 Time = v53:Label("Executer Time");
@@ -11046,8 +10952,8 @@ local v122 = require(game.ReplicatedStorage.Util.CameraShaker);
 v122:Stop();
 local v123 = game:GetService("Players");
 game:GetService("StarterGui"):SetCore("SendNotification", {
-	Title = "Rubu Roblox",
+	Title = "Mastery Hub",
 	Text = "Loading Done!",
-	Icon = "rbxthumb://type=Asset&id=123448871674913&w=150&h=150",
+	Icon = "rbxthumb://type=Asset&id=103691718434653&w=150&h=150",
 	Duration = 10
 });
