@@ -1,3 +1,24 @@
+-- CẤU HÌNH SCRIPT BẰNG GETGENV
+getgenv().Key = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
+getgenv().Team = "Pirates"
+getgenv().AutoScript = true
+getgenv().AutoFarm = true
+getgenv().FastAttack = true
+getgenv().AutoQuest = true
+getgenv().Webhook = ""
+
+-- KIỂM TRA GAME ĐÃ LOAD
+repeat wait() until game:IsLoaded()
+
+-- KIỂM TRA KEY
+local validKey = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
+if getgenv().Key ~= validKey then
+    warn("[Script] Key không hợp lệ. Vui lòng nhập đúng key.")
+    game.Players.LocalPlayer:Kick("Key sai. Vui lòng nhập lại.")
+    return
+else
+    print("[Script] Key hợp lệ. Tiếp tục...")
+end
 --[[
 
 From: Qminh(Kenny)
@@ -82,17 +103,17 @@ local function v2(v124, v125)
 end
 _G.BGColor_1 = Color3.fromRGB(30, 30, 30);
 _G.BGColor_2 = Color3.fromRGB(20, 20, 20);
-_G.Color = Color3.fromRGB(139, 0, 0)
-_G.WindowBackgroundColor = Color3.fromRGB(12, 12, 12);
+_G.Color = Color3.fromRGB(0, 139, 0)
+_G.WindowBackgroundColor = Color3.fromRGB(230, 230, 230);
 _G.BackgroundItemColor = Color3.fromRGB(20, 20, 20);
-_G.TabWindowColor = Color3.fromRGB(30, 30, 30);
+_G.TabWindowColor = Color3.fromRGB(240, 240, 240);
 _G.ContainerColor = Color3.fromRGB(30, 30, 30);
 _G.TitleTextColor = Color3.fromRGB(150, 150, 150);
 _G.ImageColor = Color3.fromRGB(150, 150, 150);
 _G.LineThemeColor = Color3.fromRGB(150, 150, 150);
 _G.TabTextColor = Color3.fromRGB(150, 150, 150);
 _G.TabImageColor = Color3.fromRGB(150, 150, 150);
-_G.TabThemeColor = Color3.fromRGB(250, 0, 0);
+_G.TabThemeColor = Color3.fromRGB(100, 100, 100);
 _G.SectionColor = Color3.fromRGB(150, 150, 150);
 _G.SectionImageColor = Color3.fromRGB(150, 150, 150);
 _G.SectionTextColor = Color3.fromRGB(150, 150, 150);
