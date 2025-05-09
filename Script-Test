@@ -1,11 +1,6 @@
 -- CẤU HÌNH SCRIPT BẰNG GETGENV
 getgenv().Key = "f2e6b1dc-3f6a-4e7a-8c6d-cbfbf949df94"
 getgenv().Team = "Pirates"
-getgenv().AutoScript = true
-getgenv().AutoFarm = true
-getgenv().FastAttack = true
-getgenv().AutoQuest = true
-getgenv().Webhook = ""
 
 -- KIỂM TRA GAME ĐÃ LOAD
 repeat wait() until game:IsLoaded()
