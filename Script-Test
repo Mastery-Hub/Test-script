@@ -1,3 +1,4 @@
+-- Check Executor 
 local executor = getexecutorname() or identifyexecutor()
 
 if executor then
@@ -28,7 +29,7 @@ if executor then
         "Ronix",
         "Atlantis",
         "JJsploit",
-        "Frostware"
+        "Frostware" -- thêm vào thì tùy ae
     }
 
     local isExecutorSupported = false
@@ -42,13 +43,9 @@ if executor then
     if isExecutorSupported then
         print("Supported Executor!")
     else
-        game.Players.LocalPlayer:Kick("Not supported TNG Skid executor!")
+        game.Players.LocalPlayer:Kick("Not supported TNG Skid executor!") -- kick nếu exec ko support
     end
 end
-
-repeat
-    wait()
-until game:IsLoaded() and game.Players.LocalPlayer
 
 -- Danh sách các khóa hợp lệ
 local keys = {
@@ -111,14 +108,12 @@ if getgenv().Key and keys[getgenv().Key] then
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
-
-print("Whitelist success!")
 wait(.5)
 game.StarterGui:SetCore("SendNotification", {
      Title = "Mastery Hub";
      Text = "Loading...";
      Icon = "";
-     Duration = "10";
+     Duration = "5";
 })
 
 wait(.1)
@@ -128,7 +123,7 @@ wait(.1)
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
-local Label = Instance.new("ImageLabel")
+local ImageLabel = Instance.new("ImageLabel")
 local UICorner = Instance.new("UICorner")
 local TextButton = Instance.new("TextButton")
 
@@ -155,7 +150,7 @@ ImageLabel.BackgroundTransparency = 1
 ImageLabel.BorderSizePixel = 1
 ImageLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
 ImageLabel.ImageColor3 = Color3.fromRGB(255, 255, 255)
-ImageLabel.Image = "http://www.roblox.com/asset/?id=103691718434653" -- Thay 5009915795 Bằng ảnh của anh em
+ImageLabel.Image = "http://www.roblox.com/asset/?id=5009915795" -- Thay 5009915795 Bằng ảnh của anh em
 
 UICorner.CornerRadius = UDim.new(1, 0)
 UICorner.Parent = Frame
@@ -209,10 +204,10 @@ end)
 print("Loading Main Ui")
 wait(.1)
 game.StarterGui:SetCore("SendNotification", {
-     Title = "Mastery Hub";
+     Title = "Lonely Hub";
      Text = "Loading Main Ui";
      Icon = "";
-     Duration = "10";
+     Duration = "2";
 })
 wait(.1)
 
@@ -223,8 +218,8 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "Mastery Hub",
-    SubTitle = "MAKE BY QMINH (KENNY)",
-    TabWidth = 160,
+    SubTitle = "Make By Qminh (Kenny)",
+    TabWidth = 170,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = true, 
     Theme = "Light",
@@ -232,7 +227,6 @@ local Window = Fluent:CreateWindow({
 })
 ----------------------------------------Tab----------------------------------------
 local Tabs = {
-    AM = Window:AddTab({ Title = "About Mastery", Icon = "" }), 
     Client = Window:AddTab({ Title = "Client", Icon = "" }),
     Dev = Window:AddTab({ Title = "Developer", Icon = "" }),
     LP = Window:AddTab({ Title = "Local Player", Icon = "" }),
@@ -249,33 +243,6 @@ local Tabs = {
     If = Window:AddTab({ Title = "Info", Icon = "" }),
 }
 ----------------------------------------Client----------------------------------------
-print("AM Tab Loading")
-wait(1)
- Tabs.AM:AddParagraph({
-        Title = "Mastery Hub",
-        Content = "MAKE BY QMINH (KENNY)"
-    })
-    
-    Tabs.AM:AddParagraph({
-        Title = "About Mastery",
-        Content = "SCRIPT MAKE BY QMINH (KENNY)"
-    })   
-     Tabs.AM:AddButton({
-        Title = "Web Getkey",
-        Description = "Web getkey All Script Mastery Hub",
-        Callback = function()
-            setclipboard("https://mastery-hub.github.io/GetKeyScriptMastery/")
-        end
-    })
-    Tabs.AM:AddButton({
-        Title = "SHOP BY QMINH (KENNY)",
-        Description = "Shop Mastery Hub",
-        Callback = function()
-            setclipboard("https://shoproblox29.cfd/")
-        end
-    })
-    
----------------------------------------------------
 print("Client Tab Loading")
 wait(1)
     Tabs.Client:AddButton({
@@ -625,6 +592,13 @@ Tabs.BF:AddParagraph({
         Content = "Script Support BloxFruits Scroll Down For More"
     })
 wait(5)
+Tabs.BF:AddButton({
+        Title = "Mastery Hub",
+        Description = "NoKey",  
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Mastery-Hub/Mastery-Free/refs/heads/main/TralaleroTralala.lua"))()
+        end
+    })
 Tabs.BF:AddButton({
         Title = "Redz Hub",
         Description = "NoKey",  
@@ -1477,14 +1451,21 @@ Tabs.If:AddParagraph({
         Content = "Thank "..game.Players.LocalPlayer.Name.." for use script!"
     })
 
+    Tabs.If:AddButton({
+        Title = "Shop",
+        Description = "",
+        Callback = function()
+            setclipboard("https://shoproblox29.cfd/")
+        end
+    })
     Tabs.If:AddParagraph({
         Title = "Mastery Hub",
-        Content = "MAKE BY QMINH (KENNY)"
+        Content = "Make By Qminh (Kenny)"
     })
     
     Tabs.If:AddParagraph({
         Title = "Other Info",
-        Content = "SCRIPT MAKE BY QMINH (KENNY)"
+        Content = "Mastery Hub Tổng hợp"
     })
     
     Tabs.If:AddParagraph({
@@ -1515,11 +1496,17 @@ Tabs.If:AddParagraph({
      Title = "Mastery Hub";
      Text = "Loaded!";
      Icon = "";
-     Duration = "10";
+     Duration = "2";
 })
 wait(.1) 
 print("Loaded!")
 wait(.1)
 warn("Cali Con Cặc")
-wait(.1)
-warn("VIETNAM NUMBER 1")
+else
+    if not getgenv().Key then
+        -- Nếu không có key, kêu nó nhập zô
+        warn("please enter your key!")
+    end
+    -- Nếu key không đúng, kick mịa nó luôn
+    game.Players.LocalPlayer:Kick("Invalid Key! Please enter your correct key!")
+end
