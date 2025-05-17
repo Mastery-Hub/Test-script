@@ -1646,7 +1646,7 @@ v70.BorderSizePixel = 0
 v70.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
 v70.Size = UDim2.new(0, 53.5, 0, 53.5)
 v70.BackgroundTransparency = 1
-v70.Image = "rbxassetid://139290470944238"
+v70.Image = "rbxassetid://103691718434653"
 v70.Draggable = true
 v70.MouseButton1Click:Connect(
     function()
@@ -3377,7 +3377,7 @@ local v91
 local v92
 RunService = game:GetService("RunService")
 speaker = game.Players.LocalPlayer
-vehicleflyspeed = 20
+vehicleflyspeed = 40
 function getRoot(v485)
     local v486 =
         v485:FindFirstChild("HumanoidRootPart") or v485:FindFirstChild("Torso") or v485:FindFirstChild("UpperTorso")
@@ -4265,7 +4265,7 @@ v101:Label("Mọi Người Vào Giao Lưu")
 v101:Button(
     "Sao Chép Link Discord",
     function()
-        setclipboard("https://discord.com/invite/hcJ8PHtkfy")
+        setclipboard("https://discord.gg/AbYeHux9")
     end
 )
 v101:Seperator("Thời Gian")
