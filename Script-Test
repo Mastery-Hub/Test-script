@@ -21,7 +21,7 @@ local TweenService = game:GetService("TweenService")
     -- Setup Blur Frame
     Blur.Name = "Blur"
     Blur.Parent = MasteryHub
-    Blur.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Blur.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     Blur.BackgroundTransparency = 1 -- Start invisible
     Blur.BorderSizePixel = 0
     Blur.Position = UDim2.new(0, 0, -0.153, 0)
@@ -1054,7 +1054,7 @@ v46.Window = function(v260, v261, v262, v263)
             v1291.Position = UDim2.new(0, 280, 0, 6)
             v1291.Rotation = 180
             v1291.Size = UDim2.new(0, 20, 0, 20)
-            v1291.Image = "rbxassetid://6031090990"
+            v1291.Image = "rbxassetid://103691718434653"
             v1290.Name = "DropButton"
             v1290.Parent = v1284
             v1290.BackgroundColor3 = Color3.fromRGB(224, 224, 224)
@@ -1530,7 +1530,7 @@ v46.Window = function(v260, v261, v262, v263)
             v1601.BackgroundTransparency = 1
             v1601.Position = UDim2.new(0, 0, 0, 1)
             v1601.Size = UDim2.new(0, 18, 0, 18)
-            v1601.Image = v1597 or "rbxassetid://8666601749"
+            v1601.Image = v1597 or "rbxassetid://103691718434653"
             v1600.Name = "PaddingLabel"
             v1600.Parent = v1599
             v1600.PaddingLeft = UDim.new(0, 1)
@@ -4345,7 +4345,7 @@ spawn(
         while wait() do
             pcall(
                 function()
-                    v116:Set("Diểm Tím:" .. " " .. game:GetService("Players").LocalPlayer.Data.Fragments.Value)
+                    v116:Set("Điểm Tím:" .. " " .. game:GetService("Players").LocalPlayer.Data.Fragments.Value)
                 end
             )
         end
