@@ -3377,7 +3377,7 @@ local v91
 local v92
 RunService = game:GetService("RunService")
 speaker = game.Players.LocalPlayer
-vehicleflyspeed = 5
+vehicleflyspeed = 20
 function getRoot(v485)
     local v486 =
         v485:FindFirstChild("HumanoidRootPart") or v485:FindFirstChild("Torso") or v485:FindFirstChild("UpperTorso")
@@ -5971,7 +5971,7 @@ spawn(
                             if game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate [Lv. 1200]") then
                                 if
                                     game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild(
-                                        "ImageLabel"
+                                        
                                     )
                                  then
                                     repeat
@@ -13274,7 +13274,7 @@ v108:Button(
                     (game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buy" .. v1103, true) == 1))
              then
                 local v1941 = Instance.new("ImageLabel", v711)
-                v1941.Image = "rbxassetid://9945562382"
+                v1941.Image = "rbxassetid://103691718434653"
                 v1941.ImageRectSize = Vector2.new(100, 100)
                 v1941.ImageRectOffset = v710[v1103] * 100
             end
