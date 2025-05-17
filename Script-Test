@@ -1,113 +1,400 @@
+-- Roblox Key System UI Script
+-- This script creates a user interface for a key system in Roblox
+
+-- Setup variables and services
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
-    local Players = game:GetService("Players")
-    local SoundService = game:GetService("SoundService")
-    local player = Players.LocalPlayer
 
-    -- Create GUI elements
-    local MasteryHub = Instance.new("ScreenGui")
-    local Blur = Instance.new("Frame")
-    local MasteryHubImage = Instance.new("ImageLabel")
-    local UICorner = Instance.new("UICorner")
-    local MasteryHubLabel = Instance.new("TextLabel")
-    local Creator = Instance.new("TextLabel")
-    local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+-- Configuration
+local CONFIG = {
+	KEYS = {
+		"df3be29b-3649-4bc2-b4e5-7c7e36228179",
+        "383e652d-67c8-4693-b6a4-53a8bfe33f88",
+        "c67200ef-e754-4722-8b16-b76311693c4d",
+        "ad475863-da4f-4358-81a5-69a0fef5bb76",
+        "a1105ea7-7a29-4504-9573-e1467d74cfb0",
+        "8da9fa5f-f474-4abc-9365-4e0d0ddefa7b",
+        "fb704535-9c1f-44f7-82ab-928f71d94bb3",
+        "622ee71a-03a2-46de-b67f-617f6172e1f3",
+        "5676b378-4d2d-4096-b947-2e7f3ce40e3d",
+        "6a15e9ab-aadf-41a7-bef9-5a905f5f0c4a",
+        "dcdb5839-13d2-4d1a-a9ba-3ee861c677be",
+        "f67092f7-9767-45dc-86f7-2f90b39c4891",
+        "60c6cc6e-1321-453b-b538-3dbe11c45112",
+        "6dca39ff-f909-4ec0-9677-d15df4ac4018",
+        "f1174166-e9ee-429d-b47b-0c5633bbe178",
+        "0941c4c7-8bac-4382-9176-a91f14ab0c61",
+        "a954a182-2278-4347-8a8c-c5d45d845d6c",
+        "ca42d35f-3407-4210-a283-8421938cb35c",
+        "36950c3f-c1be-44d1-ac18-91c0c1da1aa0",
+        "9e943519-7c71-41ab-b29a-bb1783432000",
+        "7fbc5e65-015d-4717-9871-2e00f47aefbc",
+        "be15e137-14f7-47b0-9236-5f6290090f64",
+        "dd3a2a1c-5b34-4fe0-97c3-425886619c57",
+        "b5268bc8-507a-43be-8f2a-75d037a4ef28",
+        "f98ef630-aa7a-4d77-a49b-a074dbb872bb",
+        "92dc6aa5-d839-4e10-86b0-84f56855c738",
+        "5a0b4490-b3ae-43d9-bab4-f385360adc13",
+        "c5310bfd-13fe-42ee-8a0d-5ea06255d734",
+        "336795fb-6e95-4834-87c8-8ed0e4d81de4",
+        "378616bd-2324-47f6-977e-171d86e3074b",
+        "84a77bc8-f626-4ae0-876e-190ccbc33e50",
+        "34e88c0d-0c04-4ec3-af11-57f499d86ea3",
+        "3a879301-a28a-4e4b-b237-91695f8d9bbb",
+        "5541e754-8bf0-4cd7-ba68-6dcc02d6e204",
+        "07e99a9c-2998-417f-a9b2-6abf720ad052",
+        "150a6c8f-6e50-488d-91b9-4f2322dd47ad",
+        "76022acb-36c8-4f69-8872-1998ba568db2",
+        "cfec9b6a-b72b-4de6-8adb-d954b631b758",
+        "9ee05664-d0bd-4261-9c2a-5919a132c258",
+        "7405791d-bcf8-4e49-9215-c70b415f28dc",
+        "99669e14-205d-4759-902f-e009357ec245",
+        "3b7a7f4c-4f03-484b-8e9b-5adcb40d9aa3",
+        "caeed0fc-5384-44dd-8058-c3ab1bab7a58",
+        "5a6ab739-ab07-45ef-a80e-ccdb6b9790b3",
+        "baa35508-94e8-45c3-b0b7-42892ddc2c4e",
+        "c11fb845-db36-49ed-a299-0cb77712df9d",
+        "bb40d302-20e1-4aa4-9f06-10258577b094",
+        "0b424c1f-21a6-4e19-aeee-5d3b0305b113",
+        "552d33de-96f8-4758-bf77-9ca8c953d6e4",
+        "34f449c9-e276-4e05-beee-f4e4cefe2282"
+	},
+	MAX_ATTEMPTS = 3,
+	REMOTE_EVENT_NAME = "ValidateKey" -- Change this to match your RemoteEvent name
+}
 
-    -- Setup ScreenGui
-    MasteryHub.Name = "MasteryHub"
-    MasteryHub.Parent = player:WaitForChild("PlayerGui")
-    MasteryHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    MasteryHub.ResetOnSpawn = false
+-- Create RemoteEvent if it doesn't exist (for testing purposes)
+-- In a real game, this should be created on the server
+local ValidateKeyEvent = ReplicatedStorage:FindFirstChild(CONFIG.REMOTE_EVENT_NAME)
+if not ValidateKeyEvent then
+	ValidateKeyEvent = Instance.new("RemoteEvent")
+	ValidateKeyEvent.Name = CONFIG.REMOTE_EVENT_NAME
+	ValidateKeyEvent.Parent = ReplicatedStorage
+end
 
-    -- Setup Blur Frame
-    Blur.Name = "Blur"
-    Blur.Parent = MasteryHub
-    Blur.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Blur.BackgroundTransparency = 1 -- Start invisible
-    Blur.BorderSizePixel = 0
-    Blur.Position = UDim2.new(0, 0, -0.153, 0)
-    Blur.Size = UDim2.new(1, 0, 1.251, 0)
+-- Create the UI
+local function createKeySystemUI()
+	-- Create ScreenGui
+	local KeySystemGui = Instance.new("ScreenGui")
+	KeySystemGui.Name = "KeySystemGui"
+	KeySystemGui.ResetOnSpawn = false
+	KeySystemGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	KeySystemGui.Parent = PlayerGui
+	
+	-- Create main frame
+	local MainFrame = Instance.new("Frame")
+	MainFrame.Name = "MainFrame"
+	MainFrame.Size = UDim2.new(0, 400, 0, 250)
+	MainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
+	MainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	MainFrame.BorderSizePixel = 0
+	MainFrame.ClipsDescendants = true
+	MainFrame.Parent = KeySystemGui
+	
+	-- Add corner radius
+	local UICorner = Instance.new("UICorner")
+	UICorner.CornerRadius = UDim.new(0, 8)
+	UICorner.Parent = MainFrame
+	
+	-- Add shadow
+	local Shadow = Instance.new("ImageLabel")
+	Shadow.Name = "Shadow"
+	Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	Shadow.BackgroundTransparency = 1
+	Shadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Shadow.Size = UDim2.new(1, 40, 1, 40)
+	Shadow.ZIndex = -1
+	Shadow.Image = "rbxassetid://5028857084"
+	Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	Shadow.ImageTransparency = 0.5
+	Shadow.Parent = MainFrame
+	
+	-- Create title
+	local TitleLabel = Instance.new("TextLabel")
+	TitleLabel.Name = "TitleLabel"
+	TitleLabel.Size = UDim2.new(1, 0, 0, 40)
+	TitleLabel.BackgroundTransparency = 1
+	TitleLabel.Position = UDim2.new(0, 0, 0, 10)
+	TitleLabel.Font = Enum.Font.GothamBold
+	TitleLabel.Text = "Mastery Hub Key System"
+	TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TitleLabel.TextSize = 24
+	TitleLabel.Parent = MainFrame
+	
+	-- Create subtitle
+	local SubtitleLabel = Instance.new("TextLabel")
+	SubtitleLabel.Name = "SubtitleLabel"
+	SubtitleLabel.Size = UDim2.new(1, 0, 0, 20)
+	SubtitleLabel.BackgroundTransparency = 1
+	SubtitleLabel.Position = UDim2.new(0, 0, 0, 45)
+	SubtitleLabel.Font = Enum.Font.Gotham
+	SubtitleLabel.Text = "Please enter the key to access this script"
+	SubtitleLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+	SubtitleLabel.TextSize = 14
+	SubtitleLabel.Parent = MainFrame
+	
+	-- Create key input box
+	local KeyInput = Instance.new("TextBox")
+	KeyInput.Name = "KeyInput"
+	KeyInput.Size = UDim2.new(0.8, 0, 0, 40)
+	KeyInput.Position = UDim2.new(0.1, 0, 0, 85)
+	KeyInput.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	KeyInput.BorderSizePixel = 0
+	KeyInput.Font = Enum.Font.Gotham
+	KeyInput.PlaceholderText = "Enter Key Here..."
+	KeyInput.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
+	KeyInput.Text = ""
+	KeyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+	KeyInput.TextSize = 14
+	KeyInput.ClearTextOnFocus = false
+	KeyInput.Parent = MainFrame
+	
+	-- Add corner radius to input
+	local InputCorner = Instance.new("UICorner")
+	InputCorner.CornerRadius = UDim.new(0, 6)
+	InputCorner.Parent = KeyInput
+	
+	-- Create status label
+	local StatusLabel = Instance.new("TextLabel")
+	StatusLabel.Name = "StatusLabel"
+	StatusLabel.Size = UDim2.new(1, 0, 0, 20)
+	StatusLabel.BackgroundTransparency = 1
+	StatusLabel.Position = UDim2.new(0, 0, 0, 135)
+	StatusLabel.Font = Enum.Font.Gotham
+	StatusLabel.Text = "Attempts remaining: " .. CONFIG.MAX_ATTEMPTS
+	StatusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+	StatusLabel.TextSize = 14
+	StatusLabel.Parent = MainFrame
+	
+	-- Create submit button
+	local SubmitButton = Instance.new("TextButton")
+	SubmitButton.Name = "SubmitButton"
+	SubmitButton.Size = UDim2.new(0.4, 0, 0, 40)
+	SubmitButton.Position = UDim2.new(0.3, 0, 0, 165)
+	SubmitButton.BackgroundColor3 = Color3.fromRGB(70, 130, 220)
+	SubmitButton.BorderSizePixel = 0
+	SubmitButton.Font = Enum.Font.GothamBold
+	SubmitButton.Text = "SUBMIT"
+	SubmitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	SubmitButton.TextSize = 16
+	SubmitButton.AutoButtonColor = false
+	SubmitButton.Parent = MainFrame
+	
+	-- Add corner radius to button
+	local ButtonCorner = Instance.new("UICorner")
+	ButtonCorner.CornerRadius = UDim.new(0, 6)
+	ButtonCorner.Parent = SubmitButton
+	
+	-- Get key button
+	local GetKeyButton = Instance.new("TextButton")
+	GetKeyButton.Name = "GetKeyButton"
+	GetKeyButton.Size = UDim2.new(0.6, 0, 0, 30)
+	GetKeyButton.Position = UDim2.new(0.2, 0, 0, 215)
+	GetKeyButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	GetKeyButton.BorderSizePixel = 0
+	GetKeyButton.Font = Enum.Font.Gotham
+	GetKeyButton.Text = "Get Key"
+	GetKeyButton.TextColor3 = Color3.fromRGB(100, 180, 250)
+	GetKeyButton.TextSize = 14
+	GetKeyButton.AutoButtonColor = false
+	GetKeyButton.Parent = MainFrame
+	
+	-- Create close button
+	local CloseButton = Instance.new("TextButton")
+	CloseButton.Name = "CloseButton"
+	CloseButton.Size = UDim2.new(0, 30, 0, 30)
+	CloseButton.Position = UDim2.new(1, -35, 0, 5)
+	CloseButton.BackgroundTransparency = 1
+	CloseButton.Font = Enum.Font.GothamBold
+	CloseButton.Text = "X"
+	CloseButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+	CloseButton.TextSize = 16
+	CloseButton.Parent = MainFrame
+	
+	return KeySystemGui, MainFrame, KeyInput, SubmitButton, StatusLabel, GetKeyButton, CloseButton
+end
 
-    -- Setup Image
-    MasteryHubImage.Name = "MasteryHubImage"
-    MasteryHubImage.Parent = Blur
-    MasteryHubImage.AnchorPoint = Vector2.new(0.5, 0.5)
-    MasteryHubImage.BackgroundTransparency = 1
-    MasteryHubImage.BorderSizePixel = 0
-    MasteryHubImage.Position = UDim2.new(0.5, 0, 0.308, 0)
-    MasteryHubImage.Size = UDim2.new(0.15, 0, 0.316, 0)
-    MasteryHubImage.Image = "http://www.roblox.com/asset/?id=103691718434653"
-    MasteryHubImage.ImageTransparency = 1 -- Start transparent
+-- Function to handle button hover effects
+local function setupButtonEffects(button)
+	local originalColor = button.BackgroundColor3
+	local hoverColor = Color3.fromRGB(
+		math.min(originalColor.R * 255 + 20, 255) / 255,
+		math.min(originalColor.G * 255 + 20, 255) / 255,
+		math.min(originalColor.B * 255 + 20, 255) / 255
+	)
+	local clickColor = Color3.fromRGB(
+		math.max(originalColor.R * 255 - 20, 0) / 255,
+		math.max(originalColor.G * 255 - 20, 0) / 255,
+		math.max(originalColor.B * 255 - 20, 0) / 255
+	)
+	
+	button.MouseEnter:Connect(function()
+		TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = hoverColor}):Play()
+	end)
+	
+	button.MouseLeave:Connect(function()
+		TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = originalColor}):Play()
+	end)
+	
+	button.MouseButton1Down:Connect(function()
+		TweenService:Create(button, TweenInfo.new(0.1), {BackgroundColor3 = clickColor}):Play()
+	end)
+	
+	button.MouseButton1Up:Connect(function()
+		TweenService:Create(button, TweenInfo.new(0.1), {BackgroundColor3 = hoverColor}):Play()
+	end)
+end
 
-    UICorner.Parent = MasteryHubImage
+-- Function to validate key
+local function validateKey(key)
+	for _, validKey in ipairs(CONFIG.KEYS) do
+		if key == validKey then
+			return true
+		end
+	end
+	return false
+end
 
-    -- Setup Labels
-    MasteryHubLabel.Name = "MasteryHubLabel"
-    MasteryHubLabel.Parent = MasteryHubImage
-    MasteryHubLabel.AnchorPoint = Vector2.new(0.5, 0)
-    MasteryHubLabel.BackgroundTransparency = 1
-    MasteryHubLabel.Position = UDim2.new(0.5, 0, 1.1, 0)
-    MasteryHubLabel.Size = UDim2.new(2, 0, 0.5, 0)
-    MasteryHubLabel.Font = Enum.Font.FredokaOne
-    MasteryHubLabel.Text = "Mastery Hub"
-    MasteryHubLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    MasteryHubLabel.TextScaled = true
-    MasteryHubLabel.TextWrapped = true
-    MasteryHubLabel.TextTransparency = 1 -- Start transparent
+-- Main function to run the key system
+local function runKeySystem()
+	local KeySystemGui, MainFrame, KeyInput, SubmitButton, StatusLabel, GetKeyButton, CloseButton = createKeySystemUI()
+	
+	-- Setup button effects
+	setupButtonEffects(SubmitButton)
+	
+	-- Variables for key validation
+	local attempts = CONFIG.MAX_ATTEMPTS
+	
+	-- Handle submit button click
+	SubmitButton.MouseButton1Click:Connect(function()
+		local keyText = KeyInput.Text
+		
+		if keyText == "" then
+			StatusLabel.Text = "Please enter a key!"
+			StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+			return
+		end
+		
+		if validateKey(keyText) then
+			-- Key is valid
+			StatusLabel.Text = "Key is valid! Loading..."
+			StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+			
+			-- Tween success animation
+			local successTween = TweenService:Create(MainFrame, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(40, 100, 40)})
+			successTween:Play()
+			
+			-- Wait for animation to complete
+			wait(1)
+			
+			-- Hide UI
+			KeySystemGui:Destroy()
+			
+			-- Fire remote event to server to validate key
+			ValidateKeyEvent:FireServer(true)
+			
+			-- Here you would typically fire a RemoteEvent to the server
+			-- to load your script after successful validation
+			
+		else
+			-- Key is invalid
+			attempts = attempts - 1
+			
+			if attempts <= 0 then
+				StatusLabel.Text = "Too many attempts. Try again later."
+				StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+				SubmitButton.Visible = false
+				KeyInput.Visible = false
+				
+				-- Kick the player after a delay
+				wait(3)
+				Player:Kick("Too many invalid key attempts")
+			else
+				StatusLabel.Text = "Invalid key! Attempts remaining: " .. attempts
+				StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+				
+				-- Shake animation for invalid key
+				local originalPosition = MainFrame.Position
+				for i = 1, 5 do
+					MainFrame.Position = originalPosition + UDim2.new(0, math.random(-5, 5), 0, 0)
+					wait(0.05)
+				end
+				MainFrame.Position = originalPosition
+			end
+		end
+	end)
+	
+	-- Handle get key button click
+	GetKeyButton.MouseButton1Click:Connect(function()
+		-- Here you would typically redirect to your key system website
+		-- For demonstration, we'll just show instructions
+		local originalText = GetKeyButton.Text
+		GetKeyButton.Text = "Check Discord for key!"
+		wait(2)
+		GetKeyButton.Text = originalText
+	end)
+	
+	-- Handle close button click
+	CloseButton.MouseButton1Click:Connect(function()
+		KeySystemGui:Destroy()
+	end)
+	
+	-- Add button press effect for Get Key button
+	GetKeyButton.MouseEnter:Connect(function()
+		TweenService:Create(GetKeyButton, TweenInfo.new(0.2), {TextColor3 = Color3.fromRGB(150, 230, 255)}):Play()
+	end)
+	
+	GetKeyButton.MouseLeave:Connect(function()
+		TweenService:Create(GetKeyButton, TweenInfo.new(0.2), {TextColor3 = Color3.fromRGB(100, 180, 250)}):Play()
+	end)
+	
+	-- Make UI draggable
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	
+	MainFrame.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = MainFrame.Position
+			
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	MainFrame.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	game:GetService("UserInputService").InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+	
+	-- Add entrance animation
+	MainFrame.Position = UDim2.new(0.5, -200, -0.5, -125)
+	TweenService:Create(MainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back), {Position = UDim2.new(0.5, -200, 0.5, -125)}):Play()
+end
 
-    Creator.Name = "Creator"
-    Creator.Parent = MasteryHubImage
-    Creator.AnchorPoint = Vector2.new(0.5, 0)
-    Creator.BackgroundTransparency = 1
-    Creator.Position = UDim2.new(0.5, 0, 1.7, 0)
-    Creator.Size = UDim2.new(3, 0, 0.4, 0)
-    Creator.Font = Enum.Font.FredokaOne
-    Creator.Text = "Script make by QMINH (Kenny)"
-    Creator.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Creator.TextScaled = true
-    Creator.TextWrapped = true
-    Creator.TextTransparency = 1 -- Start transparent
-
-    -- Aspect Ratio
-    UIAspectRatioConstraint.Parent = MasteryHub
-    UIAspectRatioConstraint.AspectRatio = 2.845
-
-    -- Fade In Animation
-    TweenService:Create(
-        Blur,
-        TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-        {
-            BackgroundTransparency = 0.4
-        }
-    ):Play()
-
-    TweenService:Create(MasteryHubImage, TweenInfo.new(1), {ImageTransparency = 0}):Play()
-    TweenService:Create(MasteryHubLabel, TweenInfo.new(1), {TextTransparency = 0}):Play()
-    TweenService:Create(Creator, TweenInfo.new(1), {TextTransparency = 0}):Play()
-
-    -- Fade Out after delay
-    task.delay(
-        4,
-        function()
-            TweenService:Create(
-                Blur,
-                TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
-                {
-                    BackgroundTransparency = 1
-                }
-            ):Play()
-
-            TweenService:Create(MasteryHubImage, TweenInfo.new(1), {ImageTransparency = 1}):Play()
-            TweenService:Create(MasteryHubLabel, TweenInfo.new(1), {TextTransparency = 1}):Play()
-            TweenService:Create(Creator, TweenInfo.new(1), {TextTransparency = 1}):Play()
-
-            task.delay(
-                1,
-                function()
-                    MasteryHub:Destroy()
-                end
-            )
-        end
-    )
+-- Run the key system
+runKeySystem()
 --[[
 
 ________   .__   __       _____               _____                     ____  __..__          __________ 
@@ -116,7 +403,7 @@ ________   .__   __       _____               _____                     ____  __
  |    `   \|  | |  |   /    Y    \\  ___/  /    Y    \ / __ \_ \___  | |    |  \ |  ||  Y Y  \ |    |    
 /_______  /|__| |__|   \____|__  / \___  > \____|__  /(____  / / ____| |____|__ \|__||__|_|  / |____|    
         \/                     \/      \/          \/      \/  \/              \/          \/            
-         \_MASTERY HUB V2 | MAKE BY Qminh(Kenny) 
+         \_MASTERY HUB V3 (MAKE BY MASTERY HUB)
 ]]--
         if not LPH_OBFUSCATED then
     function LPH_JIT_MAX(...)
@@ -214,7 +501,7 @@ v3.BackgroundColor3 = Color3.fromRGB(224, 224, 224)
 v3.BackgroundTransparency = 1
 v3.Position = UDim2.new(-0.0529999994, 0, -0.244000003, 0)
 v3.Size = UDim2.new(0, 69, 0, 62)
-v3.Image = " rbxassetid://103691718434653"
+v3.Image = " rbxassetid://75617874946759"
 v4.Name = "posto"
 v4.Parent = v1
 v4.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
@@ -277,7 +564,7 @@ end
 _G.BGColor_1 = Color3.fromRGB(30, 30, 30)
 _G.BGColor_2 = Color3.fromRGB(20, 20, 20)
 _G.Color = Color3.fromRGB(255, 255, 255)
-_G.WindowBackgroundColor = Color3.fromRGB(119, 136, 153)
+_G.WindowBackgroundColor = Color3.fromRGB(12, 12, 12)
 _G.BackgroundItemColor = Color3.fromRGB(20, 20, 20)
 _G.TabWindowColor = Color3.fromRGB(30, 30, 30)
 _G.ContainerColor = Color3.fromRGB(30, 30, 30)
@@ -291,21 +578,21 @@ _G.SectionColor = Color3.fromRGB(150, 150, 150)
 _G.SectionImageColor = Color3.fromRGB(150, 150, 150)
 _G.SectionTextColor = Color3.fromRGB(150, 150, 150)
 _G.SectionOn = Color3.fromRGB(0, 250, 0)
-_G.HubName = "Mastery Hub V2"
-_G.StrokeColor = Color3.fromRGB(255, 99, 71)
-_G.ColorUser = Color3.fromRGB(255, 99, 71)
-_G.ColorMain = Color3.fromRGB(255, 99, 71)
-_G.ColorSetting = Color3.fromRGB(255, 99, 71)
-_G.ColorQuest = Color3.fromRGB(255, 99, 71)
-_G.ColorStats = Color3.fromRGB(255, 99, 71)
-_G.ColorSea = Color3.fromRGB(255, 99, 71)
-_G.ColorCombat = Color3.fromRGB(255, 99, 71)
-_G.ColorTP = Color3.fromRGB(255, 99, 71)
-_G.ColorRaid = Color3.fromRGB(255, 99, 71)
-_G.ColorRace = Color3.fromRGB(255, 99, 71)
-_G.ColorDF = Color3.fromRGB(255, 99, 71)
-_G.ColorShop = Color3.fromRGB(255, 99, 71)
-_G.ColorMisc = Color3.fromRGB(255, 99, 71)
+_G.HubName = "MASTERY HUB V3"
+_G.StrokeColor = Color3.fromRGB(0, 191, 255)
+_G.ColorUser = Color3.fromRGB(0, 191, 255)
+_G.ColorMain = Color3.fromRGB(0, 191, 255)
+_G.ColorSetting = Color3.fromRGB(0, 191, 255)
+_G.ColorQuest = Color3.fromRGB(0, 191, 255)
+_G.ColorStats = Color3.fromRGB(0, 191, 255)
+_G.ColorSea = Color3.fromRGB(0, 191, 255)
+_G.ColorCombat = Color3.fromRGB(0, 191, 255)
+_G.ColorTP = Color3.fromRGB(0, 191, 255)
+_G.ColorRaid = Color3.fromRGB(0, 191, 255)
+_G.ColorRace = Color3.fromRGB(0, 191, 255)
+_G.ColorDF = Color3.fromRGB(0, 191, 255)
+_G.ColorShop = Color3.fromRGB(0, 191, 255)
+_G.ColorMisc = Color3.fromRGB(0, 191, 255)
 local v46 = {}
 local v47 = {}
 local v44 = game:GetService("TweenService")
@@ -487,7 +774,7 @@ v46.Window = function(v260, v261, v262, v263)
     v314.Position = UDim2.new(0.5, 3, 0.5, 0)
     v314.Size = UDim2.new(0, 150, 1, 0)
     v314.Font = Enum.Font.Ubuntu
-    v314.Text = "MASTERY HUB V2"
+    v314.Text = "MASTERY HUB V3"
     v314.TextColor3 = Color3.fromRGB(255, 255, 255)
     v314.TextSize = 16
     v314.TextStrokeTransparency = 0
@@ -561,7 +848,7 @@ v46.Window = function(v260, v261, v262, v263)
     v391.Position = UDim2.new(0, 8, 0, 0)
     v391.Size = UDim2.new(0, 30, 1, 0)
     v391.Visible = true
-    v391.Image = "http://www.roblox.com/asset/?id=103691718434653"
+    v391.Image = "http://www.roblox.com/asset/?id=15381251591"
     v391.MouseButton1Click:Connect(
         function()
             if (v266 == false) then
@@ -622,7 +909,7 @@ v46.Window = function(v260, v261, v262, v263)
     v432.Name = "Page"
     v432.Parent = v271
     v432.AnchorPoint = Vector2.new(0.5, 0.5)
-    v432.BackgroundColor3 = Color3.fromRGB(255, 99, 71)
+    v432.BackgroundColor3 = Color3.fromRGB(0, 0, 40)
     v432.BackgroundTransparency = 1
     v432.BorderColor3 = Color3.fromRGB(0, 0, 0)
     v432.BorderSizePixel = 0
@@ -634,7 +921,7 @@ v46.Window = function(v260, v261, v262, v263)
     v433.Parent = v432
     v434.Name = "MainPage"
     v434.Parent = v432
-    v434.BackgroundColor3 = Color3.fromRGB(255, 99, 71)
+    v434.BackgroundColor3 = Color3.fromRGB(0, 0, 40)
     v434.BackgroundTransparency = 1
     v434.BorderColor3 = Color3.fromRGB(0, 0, 0)
     v434.BorderSizePixel = 0
@@ -930,7 +1217,7 @@ v46.Window = function(v260, v261, v262, v263)
             v1254.Name = "ImageSTR"
             v1254.Parent = v1246
             v1254.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-            v1254.Color = Color3.fromRGB(255, 99, 71)
+            v1254.Color = Color3.fromRGB(86, 255, 255)
             v1254.LineJoinMode = Enum.LineJoinMode.Round
             v1254.Thickness = 1.5
             v1254.Transparency = 0
@@ -2527,7 +2814,7 @@ function UpdateChestChams()
                                                 " Distance"
                                 end
                                 if (v946.Name == "Chest3") then
-                                    v2725.TextColor3 = Color3.fromRGB(255, 99, 71)
+                                    v2725.TextColor3 = Color3.fromRGB(85, 255, 255)
                                     v2725.Text =
                                         "Chest 3" ..
                                         " \n" ..
@@ -15939,9 +16226,17 @@ local v170 = game:GetService("Players")
 game:GetService("StarterGui"):SetCore(
     "SendNotification",
     {
-        Title = "MASTERY HUB V2",
+        Title = "MASTERY HUB V3",
         Text = "Đã tải xong",
-        Icon = "rbxthumb://type=Asset&id=103691718434653&w=150&h=150",
+        Icon = "rbxthumb://type=Asset&id=75617874946759&w=150&h=150",
         Duration = 10
     }
 )
+else
+    if not getgenv().Key then
+        -- Nếu không có key, cảnh báo
+        warn("please enter your key! or if you don't have the key please visit the web https://mastery-hub.github.io/GetKeyScriptMastery/ thanks you")
+    end
+    -- Nếu khóa không hợp lệ, yêu cầu nhập lại
+    game.Players.LocalPlayer:Kick("Invalid Key! Please enter your correct key!")
+end
