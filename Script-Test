@@ -986,7 +986,7 @@ function Update:Window(text,logo,keybind)
         NotificationFrame.Parent = NotificationHold
         NotificationFrame.AnchorPoint = Vector2.new(0.5, 0.5)
         NotificationFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-        NotificationFrame.BorderColor3 = Color3.new(220,220,220)
+        NotificationFrame.BorderColor3 = Color3.new(255,255,255)
         NotificationFrame.BorderSizePixel = 0
         NotificationFrame.Transparency = 0
         NotificationFrame.ClipsDescendants = true
@@ -1002,7 +1002,7 @@ function Update:Window(text,logo,keybind)
         NotifHolderUIStroke.Name = "NotifHolderUIStroke"
         NotifHolderUIStroke.Parent = NotificationFrame
         NotifHolderUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        NotifHolderUIStroke.Color = Color3.new(220,220,220)
+        NotifHolderUIStroke.Color = Color3.new(255,255,255)
         NotifHolderUIStroke.LineJoinMode = Enum.LineJoinMode.Round
         NotifHolderUIStroke.Thickness = 2
         NotifHolderUIStroke.Transparency = 0
@@ -1013,13 +1013,13 @@ function Update:Window(text,logo,keybind)
         OkayBtn.Parent = NotificationFrame
         OkayBtn.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
         OkayBtn.BorderSizePixel = 2
-        OkayBtn.BorderColor3 = Color3.new(220,220,220)
+        OkayBtn.BorderColor3 = Color3.new(255,255,255)
         OkayBtn.Position = UDim2.new(0, 125, 0, 190)
         OkayBtn.Size = UDim2.new(0, 150, 0, 30)
         OkayBtn.AutoButtonColor = true
         OkayBtn.Font = Enum.Font.SourceSans
         OkayBtn.Text = ""
-        OkayBtn.TextColor3 = Color3.new(220,220,220)
+        OkayBtn.TextColor3 = Color3.new(255,255,255)
         OkayBtn.TextSize = 13.000
 
         OkayBtnCorner.CornerRadius = UDim.new(0, 5)
