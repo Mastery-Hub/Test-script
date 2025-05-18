@@ -1,7 +1,7 @@
 -- discord.gg/AbYeHux9
 
 
-shared.LoaderTitle = "Đăng Ký Kênh Mastery Sigma";
+shared.LoaderTitle = "Script Make By Qminh (Kenny)";
 shared.LoaderKeyFrames = {
     [1] = {
         1,
@@ -25,7 +25,7 @@ local v2 = {
         Name = shared.LoaderTitle or "Loading...",
         Colors = shared.LoaderColors or {
             Main = Color3.fromRGB(0, 0, 0),
-            Topic = Color3.fromRGB(255, 255, 255),
+            Topic = Color3.fromRGB(0, 0, 0),
             Title = Color3.fromRGB(255, 255, 255),
             LoaderBackground = Color3.fromRGB(0, 0, 0),
             LoaderSplash = Color3.fromRGB(255, 255, 255)
@@ -507,7 +507,7 @@ game:GetService("VirtualInputManager"):SendKeyEvent(true,305,false,game)
 game:GetService("VirtualInputManager"):SendKeyEvent(false,305,false,game)
 end)
 UICorner.Parent = ImageButton1
-UIStroke.Color = Color3.fromRGB(0, 0, 0)
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
 UIStroke.Thickness = 1.5
 UIStroke.Parent = ImageButton1
 UIGradient.Color = ColorSequence.new{
@@ -12907,7 +12907,7 @@ end)
 
     ------------Bone------------------
     
-    S:AddSeperator("Ã°Å¸Â¦Â´ BonesÃ°Å¸Â¦Â´")
+    S:AddSeperator("------Bones------")
     
     S:AddButton("Buy Surprise [ $50 Bone ]",function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
@@ -12915,7 +12915,7 @@ end)
     
     ------------Stat------------------
     
-    S:AddSeperator("Ã°Å¸â€œÅ  Fragments Ã°Å¸â€œÅ ")
+    S:AddSeperator("------Fragments------")
 
 S:AddButton("Reset Stats (Use 2.5K Fragments)", function()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
@@ -12927,7 +12927,7 @@ S:AddButton("Random Race (Use 3K Fragments)", function()
 	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
 end)
     --------------Accessories-----------------
-    	S:AddSeperator("Ã¢Å¡â„¢Ã¯Â¸Â Accessories Ã¢Å¡â„¢Ã¯Â¸Â")
+    	S:AddSeperator("------Accessories------")
 	S:AddButton("Black Cape [ $50,000 Beli ]",function()
 		local args = {
 			[1] = "BuyItem",
