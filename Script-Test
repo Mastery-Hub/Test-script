@@ -22,13 +22,13 @@ shared.LoaderKeyFrames = {
 };
 local v2 = {
     LoaderData = {
-        Name = shared.LoaderTitle or "A Loader",
+        Name = shared.LoaderTitle or "Loading...",
         Colors = shared.LoaderColors or {
-            Main = Color3.fromRGB(255, 255, 255),
+            Main = Color3.fromRGB(0, 0, 0),
             Topic = Color3.fromRGB(255, 255, 255),
             Title = Color3.fromRGB(0, 0, 0),
-            LoaderBackground = Color3.fromRGB(255, 255, 255),
-            LoaderSplash = Color3.fromRGB(0, 0, 0)
+            LoaderBackground = Color3.fromRGB(0, 0, 0),
+            LoaderSplash = Color3.fromRGB(255, 255, 255)
         }
     },
     Keyframes = shared.LoaderKeyFrames or {
@@ -338,7 +338,7 @@ local frame = Instance.new("Frame")
 frame.AnchorPoint = Vector2.new(0.5, 0.949999988079071)
 frame.BackgroundColor3 = Color3.new(255, 255, 255)
 frame.BackgroundTransparency = 1
-frame.BorderColor3 = Color3.new(0, 0, 0)
+frame.BorderColor3 = Color3.new(255, 255, 255)
 frame.BorderSizePixel = 0
 frame.Position = UDim2.new(0.5, 0, 0.954999983, 0)
 frame.Size = UDim2.new(0, 100, 0, 100)
@@ -397,7 +397,7 @@ function Notif.New(text, timee)
     text_label.AutomaticSize = Enum.AutomaticSize.X
     text_label.BackgroundColor3 = Color3.new(255, 255, 255)
     text_label.BackgroundTransparency = 1
-    text_label.BorderColor3 = Color3.new(0, 0, 0)
+    text_label.BorderColor3 = Color3.new(255, 255, 255)
     text_label.BorderSizePixel = 0
     text_label.Size = UDim2.new(0, 0, 0, 24)
     text_label.Visible = true
@@ -632,9 +632,9 @@ function Update:Window(text,logo,keybind)
     BtnStroke.Name = "BtnStroke"
     BtnStroke.Parent = Main
     BtnStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    BtnStroke.Color = Color3.fromRGB(0, 0, 0)
+    BtnStroke.Color = Color3.fromRGB(255, 255, 255)
     BtnStroke.LineJoinMode = Enum.LineJoinMode.Round
-    BtnStroke.Thickness = 1
+    BtnStroke.Thickness = 1.5
     BtnStroke.Transparency = 0
     BtnStroke.Enabled = true
     BtnStroke.Archivable = true
@@ -868,7 +868,7 @@ function Update:Window(text,logo,keybind)
         BtnStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
         BtnStroke.Color = Color3.fromRGB(255, 255, 255)
         BtnStroke.LineJoinMode = Enum.LineJoinMode.Round
-        BtnStroke.Thickness = 1
+        BtnStroke.Thickness = 1.5
         BtnStroke.Transparency = 0
         BtnStroke.Enabled = true
         BtnStroke.Archivable = true 
