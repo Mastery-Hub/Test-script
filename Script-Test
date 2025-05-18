@@ -25,9 +25,9 @@ local v2 = {
         Name = shared.LoaderTitle or "A Loader",
         Colors = shared.LoaderColors or {
             Main = Color3.fromRGB(255, 255, 255),
-            Topic = Color3.fromRGB(200, 200, 200),
+            Topic = Color3.fromRGB(255, 255, 255),
             Title = Color3.fromRGB(0, 0, 0),
-            LoaderBackground = Color3.fromRGB(40, 40, 40),
+            LoaderBackground = Color3.fromRGB(255, 255, 255),
             LoaderSplash = Color3.fromRGB(0, 0, 0)
         }
     },
@@ -866,7 +866,7 @@ function Update:Window(text,logo,keybind)
         BtnStroke.Name = "BtnStroke"
         BtnStroke.Parent = TabButton
         BtnStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        BtnStroke.Color = Color3.fromRGB(255, 97, 77)
+        BtnStroke.Color = Color3.fromRGB(255, 255, 255)
         BtnStroke.LineJoinMode = Enum.LineJoinMode.Round
         BtnStroke.Thickness = 1
         BtnStroke.Transparency = 0
