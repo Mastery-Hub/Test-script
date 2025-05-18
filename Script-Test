@@ -1228,9 +1228,9 @@ function Update:Window(text,logo,keybind)
         UIStroke.Name = "UIStroke"
         UIStroke.Parent = CheckFrame2
         UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        UIStroke.Color = Color3.fromRGB(0, 0, 0)
+        UIStroke.Color = Color3.fromRGB(255, 255, 255)
         UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-        UIStroke.Thickness = 1
+        UIStroke.Thickness = 1.5
         UIStroke.Transparency = 0
         UIStroke.Enabled = true
         UIStroke.Archivable = true
@@ -1341,9 +1341,9 @@ function Update:Window(text,logo,keybind)
         UIStroke.Name = "UIStroke"
         UIStroke.Parent = Dropdown
         UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        UIStroke.Color = Color3.fromRGB(0, 0, 0)
+        UIStroke.Color = Color3.fromRGB(255, 255, 255)
         UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-        UIStroke.Thickness = 1
+        UIStroke.Thickness = 1.5
         UIStroke.Transparency = 0
         UIStroke.Enabled = true
         UIStroke.Archivable = true
@@ -1582,9 +1582,9 @@ function Update:Window(text,logo,keybind)
         UIStroke.Name = "UIStroke"
         UIStroke.Parent = SliderFrame_2
         UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        UIStroke.Color = Color3.fromRGB(0, 0, 0)
+        UIStroke.Color = Color3.fromRGB(255, 255, 255)
         UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-        UIStroke.Thickness = 1
+        UIStroke.Thickness = 1.5
         UIStroke.Transparency = 0
         UIStroke.Enabled = true
         UIStroke.Archivable = true
@@ -1662,9 +1662,9 @@ function Update:Window(text,logo,keybind)
         SliderStroke.Name = "SliderStroke"
         SliderStroke.Parent = BoxFrame
         SliderStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-        SliderStroke.Color = Color3.fromRGB(0, 0, 0)
+        SliderStroke.Color = Color3.fromRGB(255, 255, 255)
         SliderStroke.LineJoinMode = Enum.LineJoinMode.Round
-        SliderStroke.Thickness = 1
+        SliderStroke.Thickness = 1.5
         SliderStroke.Transparency = 0.5
         SliderStroke.Enabled = true
         SliderStroke.Archivable = true
@@ -12708,7 +12708,7 @@ S:AddToggle("Auto Buy Abilities", false, function(t)
     end
 end)
 
-S:AddSeperator("Ã¢â€ºÂµ Boats Ã¢â€ºÂµ")
+S:AddSeperator("------Boats------")
 
 BoatList = {
     "Pirate Sloop",
@@ -13375,7 +13375,7 @@ end)
     Misc:AddButton("Hop To Lower Player",function()
         getgenv().AutoTeleport = true
         getgenv().DontTeleportTheSameNumber = true 
-        getgenv().CopytoClipboard = false
+        getgenv().CopytoClipboard = true
         if not game:IsLoaded() then
             print("Game is loading waiting...")
         end
@@ -13678,7 +13678,7 @@ Misc:AddToggle("Graphic",false,function(v)
 		end
 	end)
 
-    Misc:AddSeperator("Ã¢Å¡â„¢Ã¯Â¸Â Misc Ã¢Å¡â„¢Ã¯Â¸Â")
+    Misc:AddSeperator("------Misc------")
 
 Misc:AddToggle("Anti AFK", true, function()
 local vu = game:GetService("VirtualUser")
