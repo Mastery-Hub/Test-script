@@ -4159,21 +4159,21 @@ Qminh:AddLabel("Ui: Mastery Hub")
 Qminh:AddLabel("Thank You For Assisting Me With The\n Script Interface!")
 
 Qminh:AddSeperator("Social Network")
-Qminh:AddButton("Discord Sever",function()
+Qminh:AddButton("Copy Link Discord Sever",function()
 setclipboard("https://discord.gg/AbYeHux9")
-Notif.New("Copying To Clipboard DoneðŸŽ‰", 3)
+Notif.New("Copying To Clipboard Done", 3)
 end)
-Qminh:AddButton("YouTube Official",function()
+Qminh:AddButton("Copy Link YouTube Official",function()
 setclipboard("https://www.youtube.com/@master_sigma_29")
-Notif.New("Copying To Clipboard DoneðŸŽ‰", 3)
+Notif.New("Copying To Clipboard Done", 3)
 end)
-Qminh:AddButton("Facebook Official Owner",function()
+Qminh:AddButton("Copy Link Facebook Official Owner",function()
 setclipboard("https://www.facebook.com/share/1XycMmF2GJ/")
-Notif.New("Copying To Clipboard DoneðŸŽ‰", 3)
+Notif.New("Copying To Clipboard Done", 3)
 end)
-Qminh:AddButton("Shop Mastery Hub",function()
+Qminh:AddButton(" Copy Link Shop Mastery Hub",function()
 setclipboard("https://shoproblox29.cfd")
-Notif.New("Copying To Clipboard DoneðŸŽ‰", 3)
+Notif.New("Copying To Clipboard Done", 3)
 end)
 ---- Trang Chá»§
 Main:AddSeperator("Farm Settings")
@@ -14382,4 +14382,5 @@ spawn(function()
     Title = "Mastery Hub",
     Content = "loading success",
     Duration = 10
+    Sound = rbxassetid://103691718434653 --Thay 103691718434653 bằng nhạc của anh em
 });
