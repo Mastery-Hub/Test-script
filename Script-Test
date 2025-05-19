@@ -14382,5 +14382,4 @@ spawn(function()
     Title = "Mastery Hub",
     Content = "loading success",
     Duration = 10
-    Sound = rbxassetid://103691718434653 --Thay 103691718434653 bằng nhạc của anh em
 });
