@@ -311,6 +311,13 @@ v5:Destroy();
 --         pcall(v422);
 --     end
 -- end);
+local joinSound = Instance.new("Sound")
+joinSound.Name = "JoinSound"
+joinSound.SoundId = "rbxassetid://2497077221" -- ID nhạc khi chạy mã
+joinSound.Volume = 5
+joinSound.Looped = false
+joinSound.Parent = workspace
+joinSound:Play()
 print("Break");
 local v0 = require(game:GetService("ReplicatedStorage").Notification);
 v0.new("<Color=Yellow>WELCOME TO MASTERY HUB [FREE]<Color=/>"):Display();
