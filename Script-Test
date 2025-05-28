@@ -313,15 +313,25 @@ v5:Destroy();
 --     end
 -- end);
 -- Script tạo bởi Qminh(kenny)
--- Script tạo bởi Qminh(kenny)
 
+-- Notification khi chạy script
+pcall(function()
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Mastery Hub",
+        Text = "🚀 Script loaded successfully!",
+        Duration = 5
+    })
+end)
+
+
+-- Script tạo bởi Qminh(kenny)
+-- fps 7 màu
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 pcall(function() setfpscap(120) end)
 
--- Tạo ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "RainbowFPS"
 screenGui.ResetOnSpawn = false
@@ -329,7 +339,6 @@ screenGui.DisplayOrder = 1000
 screenGui.IgnoreGuiInset = true
 screenGui.Parent = game:GetService("CoreGui")
 
--- Tạo Frame chứa label
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 150, 0, 60)
 frame.Position = UDim2.new(0, 10, 0, 10)
@@ -338,7 +347,6 @@ frame.Active = true
 frame.Draggable = true
 frame.Parent = screenGui
 
--- Label hiển thị FPS
 local textLabel = Instance.new("TextLabel")
 textLabel.Size = UDim2.new(1, 0, 0.5, 0)
 textLabel.Position = UDim2.new(0, 0, 0, 0)
@@ -349,7 +357,6 @@ textLabel.TextStrokeTransparency = 0.2
 textLabel.Text = "FPS: 0"
 textLabel.Parent = frame
 
--- Label hiển thị tên tác giả
 local authorLabel = Instance.new("TextLabel")
 authorLabel.Size = UDim2.new(1, 0, 0.5, 0)
 authorLabel.Position = UDim2.new(0, 0, 0.5, 0)
@@ -361,7 +368,6 @@ authorLabel.TextColor3 = Color3.new(1, 1, 1)
 authorLabel.Text = "Made by Qminh(kenny)"
 authorLabel.Parent = frame
 
--- Cầu vồng màu cho cả 2 label
 task.spawn(function()
     local hue = 0
     while true do
@@ -373,7 +379,6 @@ task.spawn(function()
     end
 end)
 
--- Tính toán FPS
 local frameCount = 0
 local lastUpdate = tick()
 RunService.RenderStepped:Connect(function()
@@ -387,54 +392,93 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- Turbo Lite style Anti-Lag by Qminh(kenny)
-
+-- Made by Qminh(kenny) - Anti Lag Script for Blox Fruits
 local Lighting = game:GetService("Lighting")
 local Terrain = workspace:FindFirstChildOfClass("Terrain")
-
--- Tắt hiệu ứng ánh sáng
-Lighting.GlobalShadows = false
-Lighting.FogEnd = 1e10
-Lighting.Brightness = 0
-Lighting.TimeOfDay = "14:00:00"
-
--- Xóa toàn bộ hiệu ứng, decals, textures, particles
 for _, v in ipairs(workspace:GetDescendants()) do
     if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Explosion") then
         v:Destroy()
     elseif v:IsA("Decal") or v:IsA("Texture") then
         v.Transparency = 1
-    elseif v:IsA("Fire") or v:IsA("Smoke") or v:IsA("Sparkles") then
-        v:Destroy()
-    elseif v:IsA("MeshPart") or v:IsA("Part") then
-        v.Material = Enum.Material.SmoothPlastic
-        v.Reflectance = 0
     end
 end
-
--- Terrain nhẹ hóa
+Lighting.GlobalShadows = false
+Lighting.FogEnd = 1000000
+Lighting.Brightness = 1
+for _, part in ipairs(workspace:GetDescendants()) do
+    if part:IsA("MeshPart") or part:IsA("Part") then
+        part.Material = Enum.Material.SmoothPlastic
+        part.Reflectance = 0
+    end
+end
 if Terrain then
     Terrain.WaterWaveSize = 0
     Terrain.WaterWaveSpeed = 0
     Terrain.WaterReflectance = 0
     Terrain.WaterTransparency = 1
 end
-
--- Chất lượng thấp nhất
 settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
-
--- Giảm FPS nếu cần
 pcall(function() setfpscap(30) end)
-
--- Xóa âm thanh nền không cần thiết
 for _, s in ipairs(game:GetDescendants()) do
     if s:IsA("Sound") and s.Looped then
         s.Volume = 0
     end
 end
+print("✅ Anti-Lag script activated! FPS boosted.")
 
--- Thông báo
-print("✅ Fig lag Done")
+
+
+
+-- Smooth & Stable Anti-Lag Script by Qminh(kenny)
+
+local Lighting = game:GetService("Lighting")
+local Terrain = workspace:FindFirstChildOfClass("Terrain")
+
+-- Ánh sáng tối ưu (không xóa, chỉ điều chỉnh)
+Lighting.GlobalShadows = false
+Lighting.FogEnd = 1e7
+Lighting.Brightness = 1
+Lighting.ClockTime = 14
+Lighting.OutdoorAmbient = Color3.fromRGB(127,127,127)
+Lighting.Ambient = Color3.fromRGB(127,127,127)
+
+-- Tối ưu vật thể (không xóa toàn bộ)
+for _, obj in ipairs(workspace:GetDescendants()) do
+    if obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Explosion") or obj:IsA("Smoke") or obj:IsA("Fire") or obj:IsA("Sparkles") then
+        obj:Destroy()
+    elseif obj:IsA("Decal") or obj:IsA("Texture") then
+        obj.Transparency = 0.8
+    elseif obj:IsA("MeshPart") or obj:IsA("Part") then
+        obj.Material = Enum.Material.SmoothPlastic
+        obj.Reflectance = 0
+    end
+end
+
+-- Tối ưu nước và địa hình
+if Terrain then
+    Terrain.WaterWaveSize = 0
+    Terrain.WaterWaveSpeed = 0
+    Terrain.WaterReflectance = 0
+    Terrain.WaterTransparency = 0.9
+end
+
+-- Giảm chất lượng vừa phải (giữ được hình ảnh)
+settings().Rendering.QualityLevel = Enum.QualityLevel.Level02
+
+-- Giới hạn FPS để ổn định (nếu máy yếu nên để 45)
+pcall(function() setfpscap(60) end)
+
+-- Tắt âm thanh nền không cần thiết
+for _, s in ipairs(game:GetDescendants()) do
+    if s:IsA("Sound") and s.Looped then
+        s.Volume = 0.2
+    end
+end
+
+-- ✅ Kết thúc
+print("✅ Smooth + Stable Anti-Lag Activated - Made by Qminh(kenny)")
+
+
 v14:Notify({
     Title = "Mastery Hub",
     Content = "loading success",
