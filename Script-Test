@@ -6,7 +6,7 @@ shared.LoaderTitle = "Script Make By Qminh (Kenny)";
 shared.LoaderKeyFrames = {
     [1] = {
         1,
-        5
+        10
     },
     [2] = {
         2,
@@ -35,7 +35,7 @@ local v2 = {
     Keyframes = shared.LoaderKeyFrames or {
         [1] = {
             1,
-            5
+            10
         },
         [2] = {
             2,
@@ -314,105 +314,32 @@ v5:Destroy();
 -- end);
 -- Script tạo bởi Qminh(kenny)
 
-local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-pcall(function() setfpscap(120) end)
-
--- Tạo ScreenGui
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "RainbowFPS"
-screenGui.ResetOnSpawn = false
-screenGui.DisplayOrder = 1000
-screenGui.IgnoreGuiInset = true
-screenGui.Parent = game:GetService("CoreGui")
-
--- Tạo Frame chứa label
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 150, 0, 60)
-frame.Position = UDim2.new(0, 10, 0, 10)
-frame.BackgroundTransparency = 1
-frame.Active = true
-frame.Draggable = true
-frame.Parent = screenGui
-
--- Label hiển thị FPS
-local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(1, 0, 0.5, 0)
-textLabel.Position = UDim2.new(0, 0, 0, 0)
-textLabel.Font = Enum.Font.FredokaOne
-textLabel.TextScaled = true
-textLabel.BackgroundTransparency = 1
-textLabel.TextStrokeTransparency = 0.2
-textLabel.Text = "FPS: 0"
-textLabel.Parent = frame
-
--- Label hiển thị tên tác giả
-local authorLabel = Instance.new("TextLabel")
-authorLabel.Size = UDim2.new(1, 0, 0.5, 0)
-authorLabel.Position = UDim2.new(0, 0, 0.5, 0)
-authorLabel.Font = Enum.Font.FredokaOne
-authorLabel.TextScaled = true
-authorLabel.BackgroundTransparency = 1
-authorLabel.TextStrokeTransparency = 0.5
-authorLabel.TextColor3 = Color3.new(1, 1, 1)
-authorLabel.Text = "Made by Qminh(kenny)"
-authorLabel.Parent = frame
-
--- Cầu vồng màu cho cả 2 label
-task.spawn(function()
-    local hue = 0
-    while true do
-        hue = (hue + 0.005) % 1
-        local color = Color3.fromHSV(hue, 1, 1)
-        textLabel.TextColor3 = color
-        authorLabel.TextColor3 = color
-        RunService.RenderStepped:Wait()
-    end
-end)
-
--- Tính toán FPS
-local frameCount = 0
-local lastUpdate = tick()
-RunService.RenderStepped:Connect(function()
-    frameCount = frameCount + 1
-    local now = tick()
-    if now - lastUpdate >= 1 then
-        local fps = math.floor(frameCount / (now - lastUpdate))
-        textLabel.Text = "FPS: " .. tostring(fps)
-        frameCount = 0
-        lastUpdate = now
-    end
-end)
--- Made by Qminh(kenny) - Anti Lag Script for Blox Fruits
+-- Turbo Lite style Anti-Lag by Qminh(kenny)
 
 local Lighting = game:GetService("Lighting")
 local Terrain = workspace:FindFirstChildOfClass("Terrain")
 
--- Xóa hiệu ứng particles, trails, explosions...
+-- Tắt hiệu ứng ánh sáng
+Lighting.GlobalShadows = false
+Lighting.FogEnd = 1e10
+Lighting.Brightness = 0
+Lighting.TimeOfDay = "14:00:00"
+
+-- Xóa toàn bộ hiệu ứng, decals, textures, particles
 for _, v in ipairs(workspace:GetDescendants()) do
     if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Explosion") then
         v:Destroy()
     elseif v:IsA("Decal") or v:IsA("Texture") then
         v.Transparency = 1
+    elseif v:IsA("Fire") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        v:Destroy()
+    elseif v:IsA("MeshPart") or v:IsA("Part") then
+        v.Material = Enum.Material.SmoothPlastic
+        v.Reflectance = 0
     end
 end
 
--- Tắt bóng đổ, giảm ánh sáng
-Lighting.GlobalShadows = false
-Lighting.FogEnd = 1000000
-Lighting.Brightness = 1
-
--- Xóa hoặc làm trong suốt các MeshPart không cần thiết
-for _, part in ipairs(workspace:GetDescendants()) do
-    if part:IsA("MeshPart") or part:IsA("Part") then
-        part.Material = Enum.Material.SmoothPlastic
-        part.Reflectance = 0
-    end
-end
-
--- Tắt water effect
+-- Terrain nhẹ hóa
 if Terrain then
     Terrain.WaterWaveSize = 0
     Terrain.WaterWaveSpeed = 0
@@ -420,14 +347,21 @@ if Terrain then
     Terrain.WaterTransparency = 1
 end
 
--- Giảm chất lượng Rendering
+-- Chất lượng thấp nhất
 settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
 
--- Giảm FPS nếu cần (tùy chọn)
+-- Giảm FPS nếu cần
 pcall(function() setfpscap(30) end)
 
--- Thông báo đã kích hoạt
-print("✅ Done.")
+-- Xóa âm thanh nền không cần thiết
+for _, s in ipairs(game:GetDescendants()) do
+    if s:IsA("Sound") and s.Looped then
+        s.Volume = 0
+    end
+end
+
+-- Thông báo
+print("✅ Fig lag Done")
 v14:Notify({
     Title = "Mastery Hub",
     Content = "loading success",
