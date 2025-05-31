@@ -663,7 +663,64 @@ end)
 	TweenService:Create(MainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back), {Position = UDim2.new(0.5, -200, 0.5, -125)}):Play()
 end
 
--- Run the key system
+-- Đã rút gọn cho ví dụ, giả định phần loader đã được bọc trong hàm runLoaderUI()
+-- Và được gọi khi key hợp lệ
+
+-- Tạo hàm loader (cắt ngắn đoạn gốc để làm mẫu)
+local function runLoaderUI()
+    TweenObject(v6, 0.25, {
+        Size = UDim2.new(0, 346, 0, 121)
+    });
+    wait();
+    -- (các hiệu ứng Tween khác giữ nguyên)
+    wait(0.25);
+    v5:Destroy();
+end
+
+-- Hàm chạy hệ thống key (đã sửa)
+local function runKeySystem()
+    local KeySystemGui, MainFrame, KeyInput, SubmitButton, StatusLabel, GetKeyButton, CloseButton = createKeySystemUI()
+    setupButtonEffects(SubmitButton)
+    local attempts = CONFIG.MAX_ATTEMPTS
+
+    SubmitButton.MouseButton1Click:Connect(function()
+        local keyText = KeyInput.Text
+        if keyText == "" then
+            StatusLabel.Text = "Please enter a key!"
+            StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+            return
+        end
+
+        if validateKey(keyText) then
+            StatusLabel.Text = "Key is valid! Loading..."
+            StatusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+            TweenService:Create(MainFrame, TweenInfo.new(0.5), {BackgroundColor3 = Color3.fromRGB(40, 100, 40)}):Play()
+            wait(1)
+            runLoaderUI() -- 🔁 chỉ chạy khi key hợp lệ
+            KeySystemGui:Destroy()
+            ValidateKeyEvent:FireServer(true)
+        else
+            attempts = 1
+            if attempts <= 0 then
+                StatusLabel.Text = "Too many attempts. Try again later."
+                StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+                SubmitButton.Visible = false
+                KeyInput.Visible = false
+                wait(3)
+                Player:Kick("Too many invalid key attempts")
+            else
+                StatusLabel.Text = "Invalid key! Attempts remaining: " .. attempts
+                StatusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+            end
+        end
+    end)
+end
+
+-- Chạy hệ thống key sau cùng
+runKeySystem()
+
+-- Chạy hệ thống key sau khi đảm bảo người dùng đã nhập key đúng
+-- Tránh chạy loader ngay từ đầu
 runKeySystem()
 local MatsuneA1 = {};
 
@@ -698,7 +755,7 @@ MatsuneA1["5"] = Instance.new("UIStroke", MatsuneA1["4"]);
 MatsuneA1["5"]["Color"] = Color3.fromRGB(255, 0, 0);
 
 MatsuneA1["6"] = Instance.new("UIStroke", MatsuneA1["2"]);
-MatsuneA1["6"]["Color"] = Color3.fromRGB(169, 238, 8);
+MatsuneA1["6"]["Color"] = Color3.fromRGB(255, 255, 255);
 
 local function StopTween()
     if _G.StopTween then
@@ -3773,7 +3830,7 @@ ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.120833337 - 0.10, 0, 0.0952890813 + 0.01, 0)
 ImageButton.Size = UDim2.new(0, 40, 0, 40)
 ImageButton.Draggable = true
-ImageButton.Image = "rbxassetid://100666805146072"
+ImageButton.Image = "rbxassetid://103691718434653"
 
 UICorner.CornerRadius = UDim.new(1, 0)
 UICorner.Parent = ImageButton
