@@ -367,13 +367,9 @@ local Window = Library:CreateWindow{
 }
 
 -- Tabs
-local Tabs = {
-    Info = Window:CreateTab{ Title = "info", Icon = "info" },
-    Main = Window:CreateTab{ Title = "Main", Icon = "leaf" },
-    Settings = Window:CreateTab{ Title = "Settings", Icon = "settings" }
-}
 
 -- tab info
+    Info = Window:CreateTab{ Title = "info", Icon = "info" },
 info:AddButton({
     Title = "Copy discord invite link",
     Callback = function()
@@ -399,6 +395,7 @@ info:AddButton({
     end
 })
 -- Toggles
+    Main = Window:CreateTab{ Title = "Main", Icon = "leaf" },
 local AutoCollectToggle = Tabs.Main:CreateToggle("AutoCollect", {
     Title = "Auto Collect",
     Default = false
@@ -491,6 +488,7 @@ SellInventoryToggle:OnChanged(function(v)
 end)
 
 -- Save + Interface
+    Settings = Window:CreateTab{ Title = "Settings", Icon = "settings" }
 SaveManager:SetLibrary(Library)
 InterfaceManager:SetLibrary(Library)
 SaveManager:IgnoreThemeSettings()
