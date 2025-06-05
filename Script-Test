@@ -403,7 +403,7 @@ Main:AddButton({
 -- status 
 
 -- LocalScript đặt trong TextLabel RealTime
-Status:local label = script.Parent
+local label = script.Parent
 local LocalizationService = game:GetService("LocalizationService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
@@ -433,7 +433,7 @@ end
 -- Cập nhật mỗi frame trước khi render
 game:GetService("RunService").RenderStepped:Connect(updateRealTime)
 
-status:-- LocalScript đặt trong TextLabel SvTime
+-- LocalScript đặt trong TextLabel SvTime
 local label = script.Parent
 local runService = game:GetService("RunService")
 
