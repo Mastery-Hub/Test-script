@@ -356,7 +356,7 @@ local InterfaceManager = loadstring(game:HttpGetAsync("https://raw.githubusercon
 -- Create Fluent Window
 local Window = Library:CreateWindow{
     Title = "Macgox Hub [free]",
-    SubTitle = "by Macgox Hub Developer Team",
+    SubTitle = "by Mastery Hub Developer Team",
     TabWidth = 160,
     Size = UDim2.fromOffset(830, 525),
     Resize = true,
@@ -368,14 +368,13 @@ local Window = Library:CreateWindow{
 
 -- Tabs
 local Tabs = {
-    Info = Window:CreateTab{ Title = "Info", Icon = "info" },
-    Main = Window:CreateTab{ Title = "Main", Icon = "home" },
+    Info = Window:CreateTab{ Title = "info", Icon = "info" },
+    Main = Window:CreateTab{ Title = "Main", Icon = "leaf" },
     Settings = Window:CreateTab{ Title = "Settings", Icon = "settings" }
 }
 
 -- tab info
-Info = Window:AddTab({ Title = "Tab Info", Icon = "" })
-Info:AddButton({
+info:AddButton({
     Title = "Copy discord invite link",
     Callback = function()
         pcall(function()
@@ -383,7 +382,7 @@ Info:AddButton({
         end)
     end
 })
-Info:AddButton({
+info:AddButton({
     Title = "Copy bio link",
     Callback = function()
         pcall(function()
@@ -510,58 +509,10 @@ Library:Notify{
 }
 
 SaveManager:LoadAutoloadConfig()
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local ImageLabel = Instance.new("ImageLabel")
-local UICorner = Instance.new("UICorner")
-local TextButton = Instance.new("TextButton")
-
-ScreenGui.Parent = game:GetService("CoreGui")  
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-Frame.Parent = ScreenGui
-Frame.AnchorPoint = Vector2.new(0.1, 0.1)
-Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame.BackgroundTransparency = 0
-Frame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Frame.BorderSizePixel = 1
-Frame.Position = UDim2.new(0, 20, 0.1, -6)  
-Frame.Size = UDim2.new(0, 50, 0, 50)
-Frame.Name = "dut dit"
-
-ImageLabel.Parent = Frame
-ImageLabel.Name = "MacGox Test"
-ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
-ImageLabel.Size = UDim2.new(0, 40, 0, 40)
-ImageLabel.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
-ImageLabel.BackgroundTransparency = 1
-ImageLabel.BorderSizePixel = 1
-ImageLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-ImageLabel.ImageColor3 = Color3.fromRGB(255, 255, 255)
-ImageLabel.Image = "http://www.roblox.com/asset/?id=100265371620585"
-
-UICorner.CornerRadius = UDim.new(1, 0)
-UICorner.Parent = Frame
-
-TextButton.Name = "TextButton"
-TextButton.Parent = Frame
-TextButton.AnchorPoint = Vector2.new(0, 0)
-TextButton.Position = UDim2.new(0, 0, 0, 0)
-TextButton.Size = UDim2.new(1, 0, 1, 0)
-TextButton.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
-TextButton.BackgroundTransparency = 1
-TextButton.BorderSizePixel = 1
-TextButton.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TextButton.TextColor3 = Color3.fromRGB(27, 42, 53)
-TextButton.Text = ""
-TextButton.Font = Enum.Font.SourceSans
-TextButton.TextSize = 8
-TextButton.TextTransparency = 0
-
 
 v14:Notify({
     Title = "MacGox Hub",
     Content = "loading success",
+    image = "rbxassetid://100265371620585",
     Duration = 5
 });
