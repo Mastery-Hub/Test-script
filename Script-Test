@@ -356,7 +356,7 @@ local InterfaceManager = loadstring(game:HttpGetAsync("https://raw.githubusercon
 -- Create Fluent Window
 local Window = Library:CreateWindow{
     Title = "Macgox Hub [free]",
-    SubTitle = "by Mastery Hub Developer Team",
+    SubTitle = "by Macgox Hub Developer Team",
     TabWidth = 160,
     Size = UDim2.fromOffset(830, 525),
     Resize = true,
@@ -368,15 +368,14 @@ local Window = Library:CreateWindow{
 
 -- Tabs
 local Tabs = {
-    Info = Window:CreateTab{ Title = "Main", Icon = "info" },
-    status = Window:CreateTab{ Title = "status", Icon = "clock" },
-    Main = Window:CreateTab{ Title = "Main", Icon = "leaf" },
+    Info = Window:CreateTab{ Title = "Info", Icon = "info" },
+    Main = Window:CreateTab{ Title = "Main", Icon = "home" },
     Settings = Window:CreateTab{ Title = "Settings", Icon = "settings" }
 }
 
 -- tab info
 Info = Window:AddTab({ Title = "Tab Info", Icon = "" })
-Main:AddButton({
+Info:AddButton({
     Title = "Copy discord invite link",
     Callback = function()
         pcall(function()
@@ -384,7 +383,7 @@ Main:AddButton({
         end)
     end
 })
-Main:AddButton({
+Info:AddButton({
     Title = "Copy bio link",
     Callback = function()
         pcall(function()
@@ -392,7 +391,7 @@ Main:AddButton({
         end)
     end
 })
-Main:AddButton({
+info:AddButton({
     Title = "Copy getkey link",
     Callback = function()
         pcall(function()
@@ -400,56 +399,6 @@ Main:AddButton({
         end)
     end
 })
--- status 
-
--- LocalScript đặt trong TextLabel RealTime
-local label = script.Parent
-local LocalizationService = game:GetService("LocalizationService")
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-
-local function updateRealTime()
-    local date = os.date("*t")
-    -- giờ 12h
-    local hour24 = date.hour % 24
-    local ampm = hour24 < 12 and "AM" or "PM"
-    local hour12 = ((hour24 - 1) % 12) + 1
-
-    local formattedTime = string.format("%02d:%02d:%02d %s", hour12, date.min, date.sec, ampm)
-    local formattedDate = string.format("%02d/%02d/%04d", date.day, date.month, date.year)
-
-    -- Lấy region code
-    local region = "Unknown"
-    local success, code = pcall(function()
-        return LocalizationService:GetCountryRegionForPlayerAsync(player)
-    end)
-    if success then
-        region = code
-    end
-
-    label.Text = formattedDate .. " - " .. formattedTime .. " [ " .. region .. " ]"
-end
-
--- Cập nhật mỗi frame trước khi render
-game:GetService("RunService").RenderStepped:Connect(updateRealTime)
-
--- LocalScript đặt trong TextLabel SvTime
-local label = script.Parent
-local runService = game:GetService("RunService")
-
-local function updateServerTime()
-    -- Lấy số giây đã chạy server, làm tròn
-    local total = math.floor(workspace.DistributedGameTime + 0.5)
-    local hours = math.floor(total / 3600) % 24
-    local minutes = math.floor(total / 60) % 60
-    local seconds = total % 60
-
-    label.Text = string.format("%02d Giờ | %02d Phút | %02d Giây", hours, minutes, seconds)
-end
-
--- Cập nhật theo mỗi bước vật lý của server
-runService.Heartbeat:Connect(updateServerTime)
-
 -- Toggles
 local AutoCollectToggle = Tabs.Main:CreateToggle("AutoCollect", {
     Title = "Auto Collect",
@@ -561,6 +510,55 @@ Library:Notify{
 }
 
 SaveManager:LoadAutoloadConfig()
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local ImageLabel = Instance.new("ImageLabel")
+local UICorner = Instance.new("UICorner")
+local TextButton = Instance.new("TextButton")
+
+ScreenGui.Parent = game:GetService("CoreGui")  
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.AnchorPoint = Vector2.new(0.1, 0.1)
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 0
+Frame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Frame.BorderSizePixel = 1
+Frame.Position = UDim2.new(0, 20, 0.1, -6)  
+Frame.Size = UDim2.new(0, 50, 0, 50)
+Frame.Name = "dut dit"
+
+ImageLabel.Parent = Frame
+ImageLabel.Name = "MacGox Test"
+ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+ImageLabel.Size = UDim2.new(0, 40, 0, 40)
+ImageLabel.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
+ImageLabel.BackgroundTransparency = 1
+ImageLabel.BorderSizePixel = 1
+ImageLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+ImageLabel.ImageColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.Image = "http://www.roblox.com/asset/?id=100265371620585"
+
+UICorner.CornerRadius = UDim.new(1, 0)
+UICorner.Parent = Frame
+
+TextButton.Name = "TextButton"
+TextButton.Parent = Frame
+TextButton.AnchorPoint = Vector2.new(0, 0)
+TextButton.Position = UDim2.new(0, 0, 0, 0)
+TextButton.Size = UDim2.new(1, 0, 1, 0)
+TextButton.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
+TextButton.BackgroundTransparency = 1
+TextButton.BorderSizePixel = 1
+TextButton.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TextButton.TextColor3 = Color3.fromRGB(27, 42, 53)
+TextButton.Text = ""
+TextButton.Font = Enum.Font.SourceSans
+TextButton.TextSize = 8
+TextButton.TextTransparency = 0
+
 
 v14:Notify({
     Title = "MacGox Hub",
