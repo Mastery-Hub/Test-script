@@ -129,7 +129,7 @@ local v8 = CreateObject("TextLabel", {
     Name = "UserName",
     Parent = v6,
     BackgroundTransparency = 1,
-    Text = "Script: MacGox hub(grow a garden)",
+    Text = "Script: Mastery hub (Grow A Garden)",
     Position = UDim2.new(0, 75, 0, 10),
     Size = UDim2.new(0, 200, 0, 50),
     Font = Enum.Font.GothamBold,
@@ -355,7 +355,7 @@ local InterfaceManager = loadstring(game:HttpGetAsync("https://raw.githubusercon
 
 -- Create Fluent Window
 local Window = Library:CreateWindow{
-    Title = "Macgox Hub [free]",
+    Title = "Mastery Hub [free]",
     SubTitle = "by Mastery Hub Developer Team",
     TabWidth = 160,
     Size = UDim2.fromOffset(830, 525),
@@ -368,9 +368,34 @@ local Window = Library:CreateWindow{
 
 -- Tabs
 local Tabs = {
+    Info = Window:CreateTab{ Title = "info", Icon = "info" },
     Main = Window:CreateTab{ Title = "Main", Icon = "leaf" },
     Settings = Window:CreateTab{ Title = "Settings", Icon = "settings" }
 }
+-- info
+Tabs.Info:AddButton({
+        Title = "Copy discord invite link",
+        Description = "Link discord community",
+        Callback = function()
+            setclipboard("https://discord.gg/BHAwJYud")
+        end
+    })
+    
+    Tabs.Info:AddButton({
+        Title = "Copy bio link",
+        Description = "Link bio Mastery Hub",
+        Callback = function()
+            setclipboard("https://linkbio.co/caythuemaster")
+        end
+    })
+    
+   Tabs.Info:AddButton({
+        Title = "Copy getkey link",
+        Description = "web getkey script",  
+        Callback = function()
+            setclipboard("https://mastery-hub.github.io/MasteryHub/")
+        end
+    })
 -- Toggles
 local AutoCollectToggle = Tabs.Main:CreateToggle("AutoCollect", {
     Title = "Auto Collect",
@@ -484,7 +509,7 @@ Library:Notify{
 SaveManager:LoadAutoloadConfig()
 
 v14:Notify({
-    Title = "MacGox Hub",
+    Title = "Mastery Hub",
     Content = "loading success",
     Duration = 5
 });
